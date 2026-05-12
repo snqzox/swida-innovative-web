@@ -1,198 +1,233 @@
 # Swida Homepage — Design Notes
 
 Output of the `/design-system`, `/design-critique`, `/frontend-design`,
-and `/ux-copy` skills, applied to the Swida homepage proposal.
+and `/ux-copy` skills, plus the dark/light theming + interactive map work.
 
-The deliverable lives at [index.html](index.html) — open it in a browser
+The deliverable lives at [`index.html`](index.html) — open it in a browser
 (or via any static server) to view the live design.
 
 ---
 
-## 1. Strategic Brief (extracted from `Input Data/Web - Description.md`)
+## 1. Strategic Brief
 
-**Core wedge** — Instacarrier. The ability to price and book a European
-freight shipment online, instantly, without a sales call. The current
-swida.sk leads with "Positioning within 30 minutes" (a tracking feature,
-not the wedge); the redesign must lead with Instacarrier.
+Source: `Input Data/Web - Description.md` (private, git-ignored).
 
-**Positioning** — *the* tech-first European forwarder. Buzzwords from the
-brief: **data, AI, 0 & 1, tech, system, structure, digital**. Memorable
-because of *how* freight is moved, not just *that* it is moved.
-
-**Proof points clients can actually feel today**
-- Live GPS updates pushed every 2–4 h into TMS or as structured email.
-- Instant binding prices via Instacarrier ("book a truck like an e-shop").
-- Structured, fast responses to email RFQs.
-- Auto-invoicing — incl. EDI for enterprise accounts.
-- Client zone with stats + loyalty.
-- Open to any API / data-flow integration the client needs.
-
-**Internal 5-phase operating model** that should be made visible:
-acquisition → request processing → capacity sourcing → monitoring →
-invoicing (carrier invoices auto-processed at ~80% straight-through).
+- **Wedge** — Instacarrier: instant online freight pricing and booking, no
+  sales call. The current `swida.sk` site buries it under `/express-transport`;
+  the new homepage leads with it.
+- **Positioning** — *the* tech-first European forwarder. Visual buzzwords from
+  the brief: **data, AI, 0 & 1, tech, system, structure, digital**.
+- **Proof points to surface**: GPS updates every 2–4 h, instant binding prices,
+  fast structured RFQ replies, automated invoicing (incl. EDI), client zone
+  with stats + loyalty, open API integrations.
+- **5-phase operating model** to make visible: acquisition → request processing
+  → capacity sourcing → monitoring → invoicing.
 
 ---
 
 ## 2. Critique of the Current Site (`swida.sk`)
 
-| # | Issue | Why it hurts | Fix in the redesign |
-|---|-------|--------------|---------------------|
-| 1 | Hero says **"Positioning within 30 minutes"** | Tracking is a secondary benefit; the *wedge* is Instacarrier. | Hero leads with **"Freight, priced in 60 seconds"** + a live-feel widget. |
-| 2 | Instacarrier hidden under "Express transport" | Buries the differentiator. | Instacarrier widget visible above the fold; product owns its own ID anchor. |
-| 3 | Carousel hero | Cuts conversion (decision fatigue, a11y issues, hidden slides). | Static, single, focused hero. |
-| 4 | Heavy stock-photo / clock-face imagery | Looks like every other forwarder. | Code/data/grid aesthetic — terminal blocks, structured JSON, mono fonts. |
-| 5 | Tech claims with no tech proof | "We're modern" doesn't land without evidence. | Pipeline section + 4 touchpoint cards each show a real, structured artifact. |
-| 6 | "Check availability" rail bolted onto right edge | Visual noise; reduces hero focus. | CTA folded into the hero + Book-this-truck button inside the widget. |
-| 7 | Floppy doodle mascot on About | Off-brand for a tech forwarder. | Removed for the homepage. Save mascot for careers/team pages. |
+| # | Issue | Fix in the redesign |
+|---|-------|---------------------|
+| 1 | Hero says *"Positioning within 30 minutes"* (tracking, not the wedge) | Hero leads with **"A freight quote in 60 seconds. Booked in two clicks."** plus the Instacarrier form and an interactive map of live routes. |
+| 2 | Instacarrier hidden under "Express transport" | The hero **is** Instacarrier — vehicle tabs, pickup/delivery fields, primary CTA. |
+| 3 | Carousel hero | Static, focused hero. The motion is now in the map (always present, never blocks scanning). |
+| 4 | Stock-photo / clock imagery | Code/data/grid aesthetic — dotted Europe with animated freight lanes, monospace JSON / log blocks in the touchpoint cards. |
+| 5 | Tech claims with no proof | 5-phase pipeline + 4 touchpoint cards, each with a real structured artifact (JSON, log lines, event handler, dashboard snapshot). |
+| 6 | "Check availability" rail bolted to right edge | CTA folded into the hero; Instacarrier widget IS the hero. |
+| 7 | Doodle mascot on About | Removed from homepage; reserved for careers/team pages. |
 
 ---
 
 ## 3. Design System
 
-### 3.1 Color tokens
-Defined in [styles/tokens.css](styles/tokens.css).
+### 3.1 Theme architecture
 
-- **Brand magenta** (carried from current swida.sk, ramped 50→900). Primary `#EC1067`.
-  Saturation kept high to feel digital, not industrial.
-- **Surface ramp** — near-black with a cool tint (`#07070C` → `#1B1B2D`)
-  so brand magenta pops without competing with photography.
-- **Accent electric blue** (`#5B8DEF`) for tech / data callouts —
-  used sparingly (every other phase tag, telemetry card).
-- **Semantic** — success / warning / danger, mostly used inside the
-  widget pill and viz blocks.
+Two themes share one token surface. Theme-independent tokens (brand pink,
+type scale, spacing, radii, motion) sit at `:root`. Surfaces, foreground, and
+line tokens are re-bucketed into `:root[data-theme="dark"]` and
+`:root[data-theme="light"]` blocks.
+
+```css
+:root { /* brand, type, space, radii, motion */ }
+:root[data-theme="dark"]  { --c-bg:#07070C; --c-fg:#F4F4F7; … }
+:root[data-theme="light"] { --c-bg:#FFFFFF; --c-fg:#0A0A12; … }
+```
+
+- **Dark is the default.** An inline early-`<script>` in `<head>` reads
+  `localStorage["swida-theme"]`, falls back to
+  `prefers-color-scheme: light`, then defaults to `dark`. It sets
+  `data-theme` *before paint* — no FOUC.
+- The **sun/moon toggle** lives in the nav between `.nav__lang` and
+  `.nav__sign`. Click flips `data-theme` and persists to `localStorage`.
+
+Tokens that stay constant across themes:
+- `--c-brand-*` ramp (anchored on the official logo's `#D81B5D`).
+- `--c-accent` (electric blue), `--c-success`.
+- Type, spacing, radii, motion.
+
+Tokens that swap per theme: page surfaces (`--c-bg`, `--c-bg-soft`,
+`--c-bg-tint`, `--c-bg-section`), lines (`--c-line`, `--c-line-soft`,
+`--c-line-strong`), foreground (`--c-fg`, `--c-fg-mute`, `--c-fg-dim`,
+`--c-fg-faint`), shadows, plus a small set of helper tokens for the vehicle
+tabs, lane fields, feature-card gradients, code-block backgrounds, and the
+trust strip.
 
 ### 3.2 Typography
-- **Display** — Space Grotesk 500/600/700. Geometric, slightly mechanical.
-- **Body** — Inter 400/500/600. Workhorse.
-- **Mono** — JetBrains Mono. Used for eyebrows, micro-labels, code-style
-  visualizations, and stat units. Mono is doing real semantic work here
-  — it signals "this is data" without saying it.
 
-Scale is fluid via `clamp()`; H1 ranges 2.5rem → 5rem.
+- **Display** — Space Grotesk 500/600/700.
+- **Body** — Inter 400/500/600.
+- **Mono** — JetBrains Mono (eyebrows, micro-labels, code visualizations).
 
-### 3.3 Spacing
-8pt base scale with half-steps (`--s-1` = 4px … `--s-14` = 160px).
-Section padding fluid: `clamp(80px, 12vw, 160px)`.
+Scale is fluid via `clamp()`; H1 ranges 2.5rem → 4.5rem.
 
-### 3.4 Components
-| Component | File / class | Notes |
+### 3.3 Components (one row per primitive)
+
+| Component | Class | Notes |
 |---|---|---|
-| Button | `.btn`, `.btn--primary`, `.btn--ghost`, `.btn--lg` | Pill shape, magenta glow on primary. |
-| Eyebrow | `.eyebrow` | Mono caps + pulsing dot. |
-| Quote widget | `.quote` | The hero-side prop. Gradient border via masked padding-trick. |
-| Feature card | `.feature` | Icon tile + heading + body. Two color modes (brand / accent). |
-| Phase row | `.phase` | Numeric prefix, body, status tag. Borders form the timeline. |
-| Touch card | `.touch__card` | Heading + body + monospace viz block (synthetic data). |
-| Stats bar | `.stats` | Four metric tiles, gradient text on the value. |
-| Final CTA | `.cta` | Twin radial glows, centered headline. |
+| Button | `.btn`, `.btn--primary`, `.btn--ghost`, `.btn--lg/xl/block` | Pill shape, brand-pink glow on primary. |
+| Eyebrow | `.eyebrow`, `.eyebrow--mute` | Mono caps + dot. Pink by default. |
+| Nav | `.nav` (always dark on both themes) | Sticky, blurred, dark surface anchors brand. |
+| Theme toggle | `.nav__icon-btn` with `.theme-icon--sun` / `--moon` | Visibility controlled by `[data-theme]`. |
+| Vehicle tabs | `.vehicle-tabs` / `.vehicle-tab` | Pill-grouped, active state turns pink. |
+| Lane fields | `.lane` / `.lane__field` (square + circle dots + dashed line) | Mirrors the route visual in the form. |
+| Map | `.map` + `.map__svg` + `.map__overlay` | Dotted Europe + JS-controlled SVG overlay. |
+| Route card | `.route-card` | Floating live-shipment summary over the map. |
+| Feature card | `.feature` + `.feature__viz--brand/blue/dark` | Tinted illustration header above text. |
+| Pipeline phase | `.phase` | Number + body + status tag. |
+| Touch card | `.touch__card` + `.touch__viz` | Body + dark monospace artifact block. |
+| Stats | `.stats` / `.stat__value` (gradient text) | Four pink-accented numbers. |
+| Final CTA | `.cta` | Pink panel with dotted backdrop. |
+| Footer | `.footer` (always dark) | Anchors the page. |
 
-### 3.5 Motion
-- `--t-fast: 140ms` for hover state, `--t-base: 240ms` for soft transitions.
-- `--ease-out` for everything; reserve `--ease-spring` for delightful
-  micro-affordances (not currently used — kept available).
-- `.reveal` → IntersectionObserver fade-up. Disabled when
-  `prefers-reduced-motion` is set.
+### 3.4 Motion
 
-### 3.6 Accessibility decisions
-- Skip-to-content link.
-- All buttons / links keyboard-focusable with visible focus ring
-  (magenta, 2px, 2px offset).
-- Semantic landmarks (`header`, `nav`, `main`, `footer`, named sections).
-- Decorative SVGs `aria-hidden`; meaningful icons paired with text.
-- Live region on the widget pill (`aria-live="polite"`).
-- The cycling Instacarrier demo pauses when `prefers-reduced-motion` is set.
-- Color contrast — body text ≥ 4.5:1 on `--c-bg` (verified
-  `--c-fg-mute` `#B4B4C2` on `#07070C` ≈ 11:1).
+- `--t-fast: 140ms`, `--t-base: 240ms`, `--t-slow: 520ms`. `--ease-out`
+  everywhere.
+- `.reveal` → IntersectionObserver fade-up.
+- All animations honor `prefers-reduced-motion` — the route controller
+  switches to static-draw mode under reduced motion.
 
----
+### 3.5 Accessibility
 
-## 4. UX Copy — Decisions Per Section
-
-Voice: **confident, plain, specific.** Second person. Numbers where they exist.
-Avoid the word "innovative" (the company name already says it).
-
-### Hero
-- **Headline:** *"Freight, priced in 60 seconds."* — replaces the current
-  "Positioning within 30 minutes." Same numerical drama, but pointed at
-  the wedge (pricing) instead of a side feature (tracking).
-- **Sub:** Names the three friction points it removes — calls, waiting on
-  sales, the long quote loop — and ends with the concrete delivery
-  promise ("within hours").
-- **Primary CTA:** *"Get an instant price"* — verb-led, value-led.
-- **Secondary CTA:** *"See how it works"* — for skeptics who need proof
-  before they'll touch the form.
-- **Meta strip:** three load-bearing numbers (volume, response, coverage).
-
-### Trust bar
-*"Moving freight for 600+ European brands"* — concrete number, no
-"trusted by." Logo names are stand-ins; replace with cleared logos.
-
-### Technology section
-Headline reframes the entire category claim:
-*"A forwarder built like a tech company."* — short, sharp, memorable,
-and exactly the brand goal from the strategy doc.
-
-### Pipeline section
-*"The boring parts of freight, handled by software."* — directly
-contrasts with the rest-of-market ("most forwarders run on email
-threads and spreadsheets"). Phase titles are intentionally banal verbs
-("Request comes in / Capacity is sourced / Truck is dispatched / …")
-because the *tag* on the right is doing the differentiation work.
-
-### Touchpoints section
-*"Four touchpoints where Swida does not feel like a forwarder."* —
-names the moment of magic. Each card has a JSON / log / event-handler
-viz so the "tech-first" claim has a visual artifact behind it.
-
-### Final CTA
-*"Price your next shipment before this page loads."* — playful,
-self-referential, and reinforces the speed claim.
+- Skip link, semantic landmarks (`header`/`nav`/`main`/`footer`), keyboard
+  focus ring (brand pink, 2 px, 2 px offset).
+- Vehicle tabs are `role="tablist"`/`role="tab"` with `aria-selected`.
+- Theme toggle has `aria-pressed` and a per-theme `aria-label`.
+- Decorative SVGs `aria-hidden`; the map container has a descriptive
+  `aria-label`.
+- Body text contrast ≥ 4.5:1 against page surface in both themes.
 
 ---
 
-## 5. Content TODOs Before Production
+## 4. Interactive Europe Map
 
-These are placeholders to be replaced with real assets:
+### 4.1 The base map
 
-- [ ] Logo wordmark — current `assets/logo.svg` is a stand-in mark + dot.
-      Use the production wordmark when available.
-- [ ] Trust-bar logos — replace text-stand-ins (`Volkswagen Group`, etc.)
-      with cleared client logos in single-color form.
-- [ ] Headline numbers (`82 k`, `98.4%`, `12 yrs`) — sanity-check with ops
-      analytics before publishing.
-- [ ] Phone number in footer — currently a placeholder `+421 00 000 0000`.
+Original asset: `Assets/pixels.svg`, 3.4 MB, 13,172 `<path>` elements.
+The Launch preview sandbox refused to load it; it also bloated the page weight.
+
+**Optimization** (built-time, via Node one-liner): each path was a tiny filled
+circle of radius 2.01 with the same shape, only the centre point differed.
+We replaced all 13,171 paths with `<use href="#d">` references to a single
+`<defs><circle id="d" r="2.01"/></defs>`. Two output files:
+
+| File | Theme | Fill | Size |
+|---|---|---|---|
+| `homepage/assets/europe-pixels.svg`      | light | `#D6D8E1` | 465 KB |
+| `homepage/assets/europe-pixels-dark.svg` | dark  | `rgba(255,255,255,0.10)` | 465 KB |
+
+Both are referenced as sibling `<img>` elements; CSS shows one based on
+`[data-theme]`. The container also paints a CSS dot-grid fallback so the
+area still reads as a map if neither asset loads.
+
+### 4.2 Route animation controller (100 routes, no repeat)
+
+- **Pool**: 40 European cities with approximate `(x, y)` in the 1215 × 967
+  viewBox + 100 hand-curated city pairs.
+- Route record shape:
+  ```js
+  { id, from: {city, cc, x, y}, to: {city, cc, x, y},
+    km, kind, price, status }
+  ```
+- **4 concurrent slots** on the map. Each slot's lifecycle:
+  1. Pick a route from the pool **not currently animating** in any slot
+     **and not in the recent-N history** (history size ≈ pool − slots − 2 = 94).
+  2. Mount an SVG `<g>` (curved path, origin + destination circles, truck
+     dot with `<animateMotion>`, pulse ring).
+  3. Dash-draw the path in 1.2 s (CSS `stroke-dashoffset` transition).
+  4. Truck traces the path over 4.4 s. Hold 0.8 s. Fade out 0.6 s.
+  5. Remove the group, free the route id, schedule next.
+- **Two floating route cards** independently cycle through the same pool with
+  their own ~`recent` history queues, on ~5 s cadence, staggered by 2.5 s.
+- **Bezier path generator**: a 10-line pure function lifts two control points
+  perpendicular to the chord by `min(220, len × 0.35)` to give each route a
+  pleasant arc.
+
+### 4.3 Reduced-motion mode
+
+If `prefers-reduced-motion: reduce`, the controller draws 3 routes once
+(no truck animation), and the floating cards fill in once and stop cycling.
+
+---
+
+## 5. UX Copy — Decisions per Section
+
+Voice: confident, plain, specific. Second person. Numbers where they exist.
+
+| Section | Headline / lead copy |
+|---|---|
+| **Hero** | *A freight quote in **60 seconds**. Booked in **two clicks**.* Primary CTA: *Get your quote.* Trust line: *Quote in 60 seconds · No signup · Book online.* Email fallback for enterprise volume. |
+| **Trust strip** | *Moving freight for 600+ European brands.* |
+| **Technology** | *A forwarder built like a tech company.* Six tiles: instant prices · 2–4 h tracking · API & EDI · AI quoting · auto-invoicing · client zone. |
+| **Pipeline** | *The boring parts of freight, handled by software.* Five phases with neutral verbs ("Request comes in", "Capacity is sourced", etc.) — the *tag* on the right does the differentiation. |
+| **Touchpoints** | *Four touchpoints where Swida does not feel like a forwarder.* Each card has a JSON / log / event-handler / dashboard artifact. |
+| **Stats** | 12 yrs · 82 k shipments · 98.4 % OTD · &lt; 30 min response. |
+| **CTA** | *Price your next shipment before this page loads.* |
+
+---
+
+## 6. Content TODOs Before Production
+
+- [ ] Replace stand-in trust-bar logo names with cleared client logos.
+- [ ] Sanity-check headline numbers (12 yrs, 82 k, 98.4 %) with ops analytics.
+- [ ] Replace placeholder phone number `+421 00 000 0000`.
 - [ ] EN copy translation pass for SK / DE / IT / FR / CZ.
+- [ ] Wire the Instacarrier form to the real quote API.
+- [ ] Tune route-pool prices/distances against actual freight-rate data.
 
 ---
 
-## 6. Implementation Path to Production Stack
+## 7. Implementation Path to Production Stack
 
-The strategy doc lists the production target as **Vue.js (Nuxt)** with a
-**Strapi** headless CMS backend. The current deliverable is framework-
-agnostic HTML + CSS + minimal vanilla JS so it ports cleanly:
+The production target is **Nuxt 3 (Vue 3) + Strapi**. The current self-
+contained `index.html` ports cleanly:
 
 | Concept here | Maps to in Nuxt + Strapi |
 |---|---|
-| `styles/tokens.css` | A `tokens.css` imported once in `nuxt.config` / `app.vue`. |
-| `styles/main.css` | Split per component into `<style scoped>` blocks on Vue components. |
-| `index.html` sections | Each `<section>` → a Vue component (Hero, QuoteWidget, FeatureGrid, Pipeline, Touchpoints, Stats, FinalCta). |
+| `styles/tokens.css` | Imported once in `app.vue` (CSS custom properties survive SSR). |
+| `styles/main.css` | Split per component into `<style scoped>` blocks. |
+| `index.html` sections | Each `<section>` → a Vue component (`Nav`, `Hero`, `MapWidget`, `TrustStrip`, `TechnologyGrid`, `Pipeline`, `Touchpoints`, `Stats`, `FinalCta`, `SiteFooter`). |
 | Hard-coded copy | Move to Strapi single-types per section so marketing can edit without a deploy. |
-| `scripts/main.js` reveal & demo cycle | Vue `IntersectionObserver` composable + `useInterval` for the demo widget. |
-| Instacarrier widget mock | Wire to the real `POST /instacarrier/quotes` once live; until then, this static demo is the storyboard. |
+| Theme toggle script | A small composable `useTheme()` reading/writing `localStorage` + reactive `data-theme`. |
+| Route pool + controller | `composables/useRouteMap.ts` returning the SVG nodes / mounting them on the overlay. |
+| Instacarrier widget mock | Wire to `POST /instacarrier/quotes` once live; the controller is otherwise the same. |
 
 ---
 
-## 7. File Map
+## 8. File Map
 
 ```
 homepage/
-├─ index.html             # Entry — open in a browser
+├─ index.html             # Entry — open in a browser (all CSS/JS inlined for portability)
 ├─ DESIGN.md              # This document
 ├─ assets/
-│  └─ logo.svg            # Stand-in mark
+│  ├─ swida-logo.svg      # Official logo
+│  ├─ europe-pixels.svg       # Dotted Europe (light)
+│  └─ europe-pixels-dark.svg  # Dotted Europe (dark)
 ├─ scripts/
-│  └─ main.js             # Reveal-on-scroll + cycling widget demo
+│  └─ main.js             # Modular copy of the inline JS (for the Vue/Nuxt port)
 └─ styles/
-   ├─ tokens.css          # Design tokens (CSS custom properties)
+   ├─ tokens.css          # Theme tokens (CSS custom properties)
    └─ main.css            # Layout + component styles
 ```
