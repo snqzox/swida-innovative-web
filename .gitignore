@@ -1,0 +1,35 @@
+# ---- OS junk ----
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---- Editors ----
+.vscode/
+.idea/
+*.swp
+*~
+
+# ---- Claude / agent metadata ----
+.claude/
+
+# ---- Private input materials (kept locally, not published) ----
+# Root-anchored so we don't also exclude homepage/assets/ on case-insensitive filesystems.
+/Input Data/
+/Assets/
+
+# ---- Node ----
+node_modules/
+npm-debug.log
+yarn-error.log
+.pnpm-debug.log
+
+# ---- Build output (future Nuxt) ----
+dist/
+.output/
+.nuxt/
+.cache/
+
+# ---- Env / secrets ----
+.env
+.env.local
+.env.*.local

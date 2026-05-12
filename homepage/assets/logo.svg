@@ -1,0 +1,10 @@
+<svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Swida">
+  <defs>
+    <linearGradient id="swidaLogoGradient" x1="0" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FF3D85"/>
+      <stop offset="1" stop-color="#EC1067"/>
+    </linearGradient>
+  </defs>
+  <path d="M4 5 L11 14 L4 23 H8.6 L13.4 17.2 L18.2 23 H22.8 L15.8 14.6 L20.6 9 H16 L13.4 12.2 L10.8 9 H6.2 L11 14 Z" fill="url(#swidaLogoGradient)"/>
+  <circle cx="23" cy="6" r="2.6" fill="url(#swidaLogoGradient)"/>
+</svg>
