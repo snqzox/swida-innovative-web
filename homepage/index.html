@@ -680,6 +680,228 @@
     .cta__row .btn--ghost:hover { background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.7); }
 
     /* ==========================================================================
+       RECOGNITION (Awards + Google Reviews)
+       ========================================================================== */
+    .recognition { padding-block: clamp(56px, 8vw, 96px); position:relative; overflow:hidden; }
+    .recognition__grid {
+      display:grid; grid-template-columns:1fr; gap:20px;
+    }
+    @media (min-width: 800px) {
+      .recognition__grid { grid-template-columns:1fr 1fr; gap:24px; }
+    }
+    .award-card {
+      border:1px solid var(--c-line);
+      border-radius:var(--r-2xl);
+      padding:clamp(40px, 5vw, 64px) clamp(24px, 4vw, 48px);
+      background:var(--c-bg-soft);
+      display:grid; place-items:center;
+      min-height:200px;
+      transition:transform var(--t-base) var(--ease-out), box-shadow var(--t-base) var(--ease-out);
+    }
+    .award-card:hover { transform:translateY(-2px); box-shadow:var(--shadow-lift); }
+    .award-card svg { max-height:64px; width:auto; color:var(--c-fg); }
+    :root[data-theme="dark"] .award-card svg { color:#fff; }
+
+    .review-badge__wrap { display:flex; justify-content:center; margin-top:48px; }
+    .review-badge {
+      padding:14px 28px;
+      background:var(--c-bg);
+      border:1px solid var(--c-line);
+      border-radius:var(--r-pill);
+      display:inline-flex; align-items:center; gap:24px;
+      box-shadow:var(--shadow-card);
+    }
+    .review-badge__brand {
+      display:flex; align-items:center; gap:0;
+      font-family:Arial, sans-serif; font-size:24px; font-weight:500;
+      letter-spacing:-0.01em;
+    }
+    .review-badge__brand .g-b { color:#4285F4; }
+    .review-badge__brand .g-r { color:#EA4335; }
+    .review-badge__brand .g-y { color:#FBBC04; }
+    .review-badge__brand .g-g { color:#34A853; }
+    .review-badge__divider { width:1px; height:36px; background:var(--c-line); }
+    .review-badge__rating { display:grid; gap:4px; }
+    .review-badge__label { font-size:13px; font-weight:500; color:var(--c-fg); }
+    .review-badge__stars { display:inline-flex; gap:1px; color:#FBA94B; }
+    .review-badge__stars svg { width:16px; height:16px; }
+    .review-badge__score {
+      font-family:var(--font-display); font-weight:700; font-size:28px;
+      color:var(--c-fg); letter-spacing:-0.02em;
+    }
+    .review-badge__score sub {
+      font-size:14px; color:var(--c-fg-mute); font-weight:500;
+      vertical-align:baseline;
+    }
+
+    /* ==========================================================================
+       WHAT WE DO (tabs)
+       ========================================================================== */
+    .wwd { padding-block:var(--section-pad-y); position:relative; overflow:hidden; }
+    .wwd__head { max-width:760px; margin-bottom:48px; }
+    .wwd__head h2 { margin-bottom:14px; }
+    .wwd__layout {
+      display:grid; grid-template-columns:1fr; gap:32px;
+    }
+    @media (min-width: 1000px) {
+      .wwd__layout { grid-template-columns:280px 1fr 260px; gap:48px; align-items:start; }
+    }
+    .wwd__tabs { display:grid; gap:8px; }
+    .wwd__tab {
+      text-align:left;
+      padding:18px 24px;
+      background:var(--c-bg);
+      border:1px solid var(--c-line);
+      border-radius:var(--r-lg);
+      font-size:13px; font-weight:600;
+      letter-spacing:0.06em; text-transform:uppercase;
+      color:var(--c-fg-mute);
+      cursor:pointer;
+      transition:background var(--t-fast) var(--ease-out),
+                 color var(--t-fast) var(--ease-out),
+                 border-color var(--t-fast) var(--ease-out),
+                 transform var(--t-fast) var(--ease-out);
+    }
+    .wwd__tab:hover { transform:translateX(2px); }
+    .wwd__tab.is-active {
+      background:var(--c-bg-dark); color:#fff;
+      border-color:var(--c-bg-dark);
+    }
+    :root[data-theme="dark"] .wwd__tab.is-active {
+      background:var(--c-brand-500); border-color:var(--c-brand-500);
+    }
+
+    .wwd__panel { position:relative; min-height:280px; }
+    .wwd__dots { display:flex; gap:6px; margin-bottom:24px; }
+    .wwd__dot {
+      width:22px; height:6px; border-radius:var(--r-pill);
+      background:var(--c-line-strong);
+      transition:background var(--t-base) var(--ease-out), width var(--t-base) var(--ease-out);
+    }
+    .wwd__dot.is-active { background:var(--c-fg); width:40px; }
+
+    .wwd__pane { display:none; }
+    .wwd__pane.is-active { display:block; animation:wwdFade 480ms var(--ease-out); }
+    @keyframes wwdFade { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+
+    .wwd__eyebrow {
+      font-family:var(--font-mono); font-size:12px; font-weight:500;
+      text-transform:uppercase; letter-spacing:0.14em;
+      color:var(--c-brand-500);
+      margin-bottom:10px;
+    }
+    .wwd__title {
+      font-family:var(--font-display); font-weight:600;
+      font-size:clamp(1.5rem, 2.6vw, 2rem); color:var(--c-fg);
+      letter-spacing:-0.02em; line-height:1.1;
+    }
+    .wwd__desc {
+      margin-top:20px; max-width:54ch;
+      font-size:15px; color:var(--c-fg-mute); line-height:1.7;
+    }
+    .wwd__stats {
+      display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));
+      gap:28px; margin-top:36px;
+    }
+    .wwd__stat-icon {
+      width:36px; height:36px; border-radius:50%;
+      background:rgba(216,27,93,0.10);
+      display:grid; place-items:center;
+      color:var(--c-brand-500);
+      margin-bottom:14px;
+    }
+    .wwd__stat-icon svg { width:18px; height:18px; }
+    .wwd__stat-value {
+      font-family:var(--font-display); font-weight:700;
+      font-size:1.375rem; color:var(--c-fg); letter-spacing:-0.01em;
+    }
+    .wwd__stat-label { font-size:13px; color:var(--c-fg-mute); margin-top:2px; }
+
+    .wwd__illu {
+      position:relative;
+      align-self:start; justify-self:end;
+      width:100%; max-width:260px;
+      aspect-ratio: 4 / 3;
+      display:grid; place-items:center;
+    }
+    .wwd__illu svg { width:100%; height:auto; }
+    .wwd__nav {
+      position:absolute; right:-8px; top:50%; transform:translateY(-50%);
+      width:44px; height:44px; border-radius:50%;
+      background:var(--c-bg);
+      border:1px solid var(--c-line);
+      color:var(--c-fg);
+      display:grid; place-items:center;
+      cursor:pointer;
+      transition:background var(--t-fast) var(--ease-out), border-color var(--t-fast) var(--ease-out);
+    }
+    .wwd__nav:hover { background:var(--c-bg-soft); border-color:var(--c-fg-faint); }
+
+    .wwd__quote-bar {
+      margin-top:48px;
+      background:var(--c-brand-50);
+      border:1px solid rgba(216,27,93,0.18);
+      border-radius:var(--r-xl);
+      padding:24px clamp(20px, 3vw, 36px);
+      display:grid; grid-template-columns:1fr; gap:20px;
+      align-items:center;
+    }
+    :root[data-theme="dark"] .wwd__quote-bar {
+      background:rgba(216,27,93,0.10);
+      border-color:rgba(216,27,93,0.25);
+    }
+    @media (min-width: 880px) {
+      .wwd__quote-bar { grid-template-columns:auto 1fr auto; gap:28px; }
+    }
+    .wwd__quote-bar-icon {
+      width:56px; height:56px; border-radius:var(--r-md);
+      background:rgba(216,27,93,0.18); color:var(--c-brand-500);
+      display:grid; place-items:center;
+    }
+    .wwd__quote-bar-icon svg { width:26px; height:26px; }
+    .wwd__quote-bar-text strong {
+      font-family:var(--font-display); font-weight:600;
+      font-size:1.125rem; color:var(--c-fg);
+      letter-spacing:-0.01em; display:block; margin-bottom:4px;
+    }
+    .wwd__quote-bar-text p { font-size:14px; color:var(--c-fg-mute); }
+
+    /* ==========================================================================
+       TRUCK BANNER (full-bleed photo with overlay text)
+       ========================================================================== */
+    .truck-banner {
+      position:relative;
+      min-height:clamp(360px, 50vw, 520px);
+      background:#0A0A12 url('https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=2400&q=70') center/cover no-repeat;
+      overflow:hidden;
+    }
+    .truck-banner::before {
+      content:""; position:absolute; inset:0;
+      background:
+        linear-gradient(90deg, rgba(7,7,12,0.92) 0%, rgba(7,7,12,0.55) 45%, transparent 75%),
+        linear-gradient(180deg, transparent 60%, rgba(7,7,12,0.45) 100%);
+    }
+    .truck-banner__inner {
+      position:relative; z-index:1;
+      display:grid; align-content:center;
+      min-height:inherit;
+      padding-block: clamp(56px, 8vw, 96px);
+      color:#fff;
+    }
+    .truck-banner__inner .eyebrow { color:var(--c-brand-300); }
+    .truck-banner__inner .eyebrow::before { background:var(--c-brand-300); box-shadow:0 0 12px var(--c-brand-300); }
+    .truck-banner__inner h2 {
+      color:#fff; max-width:18ch;
+      margin-block:18px 18px;
+      font-size:clamp(2rem, 4.5vw, 3.25rem);
+    }
+    .truck-banner__inner p {
+      color:rgba(255,255,255,0.78);
+      max-width:48ch; font-size:1.0625rem; line-height:1.6;
+    }
+    .truck-banner__inner .btn { margin-top:32px; }
+
+    /* ==========================================================================
        CONNECT  ("Stay connected with Swida" — always-dark final section)
        ========================================================================== */
     .connect {
@@ -997,6 +1219,294 @@
           <span>Volkswagen Group</span><span>Schaeffler</span><span>Continental</span>
           <span>Faurecia</span><span>ZF</span><span>Magna</span><span>Mahle</span>
         </div>
+      </div>
+    </section>
+
+    <!-- ============== RECOGNITION (Awards + Google Reviews) ============== -->
+    <section class="recognition" aria-label="Awards and reviews">
+      <div class="container">
+        <div class="recognition__grid">
+
+          <!-- Award 1 — EY Entrepreneur Of The Year -->
+          <div class="award-card reveal">
+            <svg viewBox="0 0 280 80" fill="none" aria-label="EY Entrepreneur Of The Year">
+              <!-- Pillar mark -->
+              <g transform="translate(8 16)">
+                <rect x="0"  y="22" width="6" height="26" rx="1" fill="currentColor"/>
+                <rect x="9"  y="14" width="6" height="34" rx="1" fill="currentColor"/>
+                <rect x="18" y="4"  width="6" height="44" rx="1" fill="currentColor"/>
+                <rect x="0"  y="50" width="24" height="4" rx="1" fill="currentColor"/>
+              </g>
+              <!-- Text -->
+              <text x="50" y="40"
+                font-family="Inter, system-ui, sans-serif"
+                font-size="20" font-weight="700"
+                fill="currentColor">EY Entrepreneur</text>
+              <text x="50" y="64"
+                font-family="Inter, system-ui, sans-serif"
+                font-size="20" font-weight="700"
+                fill="currentColor">Of The Year</text>
+              <text x="232" y="70"
+                font-family="Inter, system-ui, sans-serif"
+                font-size="10" font-weight="600"
+                fill="currentColor">®</text>
+            </svg>
+          </div>
+
+          <!-- Award 2 — Forbes Diamonds of Slovak Business -->
+          <div class="award-card reveal">
+            <svg viewBox="0 0 320 80" fill="none" aria-label="Forbes — Diamonds of Slovak Business">
+              <text x="0" y="44"
+                font-family="Georgia, 'Times New Roman', serif"
+                font-size="44" font-weight="700"
+                fill="currentColor"
+                letter-spacing="-1">Forbes</text>
+              <text x="0" y="68"
+                font-family="Inter, system-ui, sans-serif"
+                font-size="12" font-weight="600"
+                letter-spacing="1.5"
+                fill="currentColor">DIAMONDS OF SLOVAK BUSINESS</text>
+            </svg>
+          </div>
+
+        </div>
+
+        <!-- Google Reviews badge, centered under the award cards -->
+        <div class="review-badge__wrap reveal">
+          <div class="review-badge" role="figure" aria-label="Google Reviews — 4.9 out of 5 stars">
+            <span class="review-badge__brand" aria-hidden="true">
+              <span class="g-b">G</span><span class="g-r">o</span><span class="g-y">o</span><span class="g-b">g</span><span class="g-g">l</span><span class="g-r">e</span>
+            </span>
+            <span class="review-badge__divider" aria-hidden="true"></span>
+            <div class="review-badge__rating">
+              <span class="review-badge__label">Google reviews</span>
+              <span class="review-badge__stars" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.91L22 9.74l-5.5 4.8L18.18 22 12 18.27 5.82 22 7.5 14.54 2 9.74l7.1-.83L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.91L22 9.74l-5.5 4.8L18.18 22 12 18.27 5.82 22 7.5 14.54 2 9.74l7.1-.83L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.91L22 9.74l-5.5 4.8L18.18 22 12 18.27 5.82 22 7.5 14.54 2 9.74l7.1-.83L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.91L22 9.74l-5.5 4.8L18.18 22 12 18.27 5.82 22 7.5 14.54 2 9.74l7.1-.83L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.91L22 9.74l-5.5 4.8L18.18 22 12 18.27 5.82 22 7.5 14.54 2 9.74l7.1-.83L12 2z"/></svg>
+              </span>
+            </div>
+            <span class="review-badge__divider" aria-hidden="true"></span>
+            <span class="review-badge__score">4.9<sub>/5</sub></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== WHAT WE DO ============== -->
+    <section class="wwd" id="services" aria-label="What we do">
+      <div class="container">
+        <header class="wwd__head reveal">
+          <h2>What we do</h2>
+          <p class="lead">Our company primarily focuses on express transports, within which we can solve the most complicated freight tasks across Europe — and three more service lines for everything else.</p>
+        </header>
+
+        <div class="wwd__layout reveal">
+
+          <!-- Tabs -->
+          <div class="wwd__tabs" role="tablist" aria-label="Service categories">
+            <button class="wwd__tab is-active" role="tab" aria-selected="true" data-wwd="0">Express Transports</button>
+            <button class="wwd__tab"           role="tab" aria-selected="false" data-wwd="1">Contracted Transports</button>
+            <button class="wwd__tab"           role="tab" aria-selected="false" data-wwd="2">Regular Transports</button>
+            <button class="wwd__tab"           role="tab" aria-selected="false" data-wwd="3">Air Freight</button>
+            <button class="wwd__tab"           role="tab" aria-selected="false" data-wwd="4">Specialized Freight</button>
+          </div>
+
+          <!-- Panel -->
+          <div class="wwd__panel">
+            <div class="wwd__dots" aria-hidden="true">
+              <span class="wwd__dot is-active" data-dot="0"></span>
+              <span class="wwd__dot" data-dot="1"></span>
+              <span class="wwd__dot" data-dot="2"></span>
+              <span class="wwd__dot" data-dot="3"></span>
+              <span class="wwd__dot" data-dot="4"></span>
+            </div>
+
+            <!-- 0 — Express Transports -->
+            <div class="wwd__pane is-active" data-pane="0">
+              <div class="wwd__eyebrow">Urgent shipments</div>
+              <h3 class="wwd__title">Express Transports</h3>
+              <p class="wwd__desc">For urgent shipments that need the fastest possible pickup and delivery across Europe. Fast dispatching, time-critical delivery, regular shipment updates, and flexible vehicle selection.</p>
+              <div class="wwd__stats">
+                <div>
+                  <div class="wwd__stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 1h6M12 5V1"/></svg></div>
+                  <div class="wwd__stat-value">1 minute</div>
+                  <div class="wwd__stat-label">Price quote</div>
+                </div>
+                <div>
+                  <div class="wwd__stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg></div>
+                  <div class="wwd__stat-value">35 countries</div>
+                  <div class="wwd__stat-label">Covered in Europe</div>
+                </div>
+                <div>
+                  <div class="wwd__stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 8h13v9H1zM14 12h5l4 4v1H14zM6 17h4M17 17h2"/></svg></div>
+                  <div class="wwd__stat-value">25,000 trucks</div>
+                  <div class="wwd__stat-label">Ready in few minutes</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 1 — Contracted Transports -->
+            <div class="wwd__pane" data-pane="1">
+              <div class="wwd__eyebrow">Recurring volume</div>
+              <h3 class="wwd__title">Contracted Transports</h3>
+              <p class="wwd__desc">Long-term contracts with predictable pricing and dedicated capacity. Volume discounts, fixed lanes, monthly billing, and KPI reporting — perfect for shippers that move freight every week.</p>
+              <div class="wwd__stats">
+                <div>
+                  <div class="wwd__stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+                  <div class="wwd__stat-value">12 months</div>
+                  <div class="wwd__stat-label">Standard contract</div>
+                </div>
+                <div>
+                  <div class="wwd__stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+                  <div class="wwd__stat-value">SLA-backed</div>
+                  <div class="wwd__stat-label">On-time guarantees</div>
+                </div>
+                <div>
+                  <div class="wwd__stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+                  <div class="wwd__stat-value">Dedicated</div>
+                  <div class="wwd__stat-label">Account coordinator</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2 — Regular Transports -->
+            <div class="wwd__pane" data-pane="2">
+              <div class="wwd__eyebrow">Standard freight</div>
+              <h3 class="wwd__title">Regular Transports</h3>
+              <p class="wwd__desc">Standard freight forwarding across the EU — group, partial, or full loads with reliable transit times, clear documentation, and full GPS tracking.</p>
+              <div class="wwd__stats">
+                <div>
+                  <div class="wwd__stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+                  <div class="wwd__stat-value">1–7 days</div>
+                  <div class="wwd__stat-label">Door-to-door transit</div>
+                </div>
+                <div>
+                  <div class="wwd__stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
+                  <div class="wwd__stat-value">FTL / LTL / Groupage</div>
+                  <div class="wwd__stat-label">All load types</div>
+                </div>
+                <div>
+                  <div class="wwd__stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-7-7.58-7-12a7 7 0 1114 0c0 4.42-7 12-7 12z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
+                  <div class="wwd__stat-value">GPS-tracked</div>
+                  <div class="wwd__stat-label">Every 2–4 hours</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3 — Air Freight -->
+            <div class="wwd__pane" data-pane="3">
+              <div class="wwd__eyebrow">When road isn't fast enough</div>
+              <h3 class="wwd__title">Air Freight</h3>
+              <p class="wwd__desc">International air freight booked end-to-end. Door-to-door pickup, prioritized handling, and customs included — with IATA-certified partners on every major lane.</p>
+              <div class="wwd__stats">
+                <div>
+                  <div class="wwd__stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 00-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5L21 16z"/></svg></div>
+                  <div class="wwd__stat-value">24–72 h</div>
+                  <div class="wwd__stat-label">Global transit time</div>
+                </div>
+                <div>
+                  <div class="wwd__stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M8 14h4"/></svg></div>
+                  <div class="wwd__stat-value">Customs included</div>
+                  <div class="wwd__stat-label">Paperwork handled</div>
+                </div>
+                <div>
+                  <div class="wwd__stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M2 12h20M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg></div>
+                  <div class="wwd__stat-value">IATA partners</div>
+                  <div class="wwd__stat-label">On every major lane</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4 — Specialized Freight -->
+            <div class="wwd__pane" data-pane="4">
+              <div class="wwd__eyebrow">Oversize, ADR, refrigerated</div>
+              <h3 class="wwd__title">Specialized Freight</h3>
+              <p class="wwd__desc">Specialized cargo with the right vehicle, the right licence, and the right driver. ADR-certified, temperature-controlled, oversize, and high-value freight — moved safely and on time.</p>
+              <div class="wwd__stats">
+                <div>
+                  <div class="wwd__stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-4 9-8 10-4-1-8-5-8-10V6l8-4z"/></svg></div>
+                  <div class="wwd__stat-value">ADR-certified</div>
+                  <div class="wwd__stat-label">Hazardous goods</div>
+                </div>
+                <div>
+                  <div class="wwd__stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20M5 5l14 14M5 19L19 5"/></svg></div>
+                  <div class="wwd__stat-value">−25 °C to +25 °C</div>
+                  <div class="wwd__stat-label">Temperature-controlled</div>
+                </div>
+                <div>
+                  <div class="wwd__stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+                  <div class="wwd__stat-value">Insured</div>
+                  <div class="wwd__stat-label">Up to € 5M cover</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Illustration -->
+          <div class="wwd__illu" aria-hidden="true">
+            <svg viewBox="0 0 240 180" fill="none">
+              <!-- Pallet -->
+              <rect x="60" y="138" width="120" height="8"  rx="1" fill="#3F4154"/>
+              <rect x="60" y="148" width="120" height="8"  rx="1" fill="#52546A"/>
+              <rect x="60" y="158" width="120" height="8"  rx="1" fill="#3F4154"/>
+              <!-- Boxes -->
+              <rect x="74" y="100" width="34" height="38" rx="2" fill="#FFFFFF" stroke="#D6D8E1" stroke-width="1.5"/>
+              <rect x="112" y="92" width="34" height="46" rx="2" fill="#FFFFFF" stroke="#D6D8E1" stroke-width="1.5"/>
+              <rect x="150" y="106" width="26" height="32" rx="2" fill="#D81B5D"/>
+              <path d="M163 132V112M158 117l5-5 5 5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- Van body -->
+              <rect x="20" y="50" width="120" height="60" rx="6" fill="#FFFFFF" stroke="#D6D8E1" stroke-width="1.8"/>
+              <!-- Cab -->
+              <path d="M140 70h22l24 18v22h-46V70z" fill="#FFFFFF" stroke="#D6D8E1" stroke-width="1.8"/>
+              <rect x="146" y="76" width="32" height="14" rx="1" fill="#E5E6ED"/>
+              <!-- Wheels -->
+              <circle cx="50" cy="116" r="10" fill="#1B1B2D"/>
+              <circle cx="50" cy="116" r="3"  fill="#FFFFFF"/>
+              <circle cx="160" cy="116" r="10" fill="#1B1B2D"/>
+              <circle cx="160" cy="116" r="3"  fill="#FFFFFF"/>
+              <!-- Headlight -->
+              <circle cx="184" cy="100" r="2" fill="#FBA94B"/>
+            </svg>
+            <button class="wwd__nav" type="button" id="wwd-next" aria-label="Next service">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Pink quote-CTA bar -->
+        <div class="wwd__quote-bar reveal">
+          <div class="wwd__quote-bar-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="6" width="18" height="14" rx="2"/>
+              <path d="M3 10h18M7 14h4M7 17h2"/>
+              <path d="M16 3v4M8 3v4"/>
+            </svg>
+          </div>
+          <div class="wwd__quote-bar-text">
+            <strong>Free transport price quote</strong>
+            <p>Type a route, get a binding price in 60 seconds — no signup required.</p>
+          </div>
+          <a href="#instacarrier" class="btn btn--primary btn--lg">
+            Get your quote
+            <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== TRUCK BANNER (full-bleed photo) ============== -->
+    <section class="truck-banner" aria-label="European freight by Swida">
+      <div class="container truck-banner__inner reveal">
+        <span class="eyebrow">European backbone</span>
+        <h2>One network. Every European border.</h2>
+        <p>From the Slovak HQ to the ports of Rotterdam, the docks of Genoa, and the warehouses of Hamburg — Swida's carrier network covers every major European corridor, 24/7.</p>
+        <a href="#instacarrier" class="btn btn--primary btn--lg">
+          See live routes
+          <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
       </div>
     </section>
 
@@ -1393,6 +1903,34 @@ loyalty:     <span class="ok">+ 2 480 pts</span></div>
           tab.setAttribute("aria-selected", "true");
         });
       });
+
+      /* =====================================================================
+         WHAT WE DO  — tab / pane / dot sync + auto-advance arrow
+         ===================================================================== */
+      var wwdTabs  = document.querySelectorAll(".wwd__tab");
+      var wwdPanes = document.querySelectorAll(".wwd__pane");
+      var wwdDots  = document.querySelectorAll(".wwd__dot");
+      var wwdNext  = document.getElementById("wwd-next");
+
+      function wwdShow(idx) {
+        wwdTabs.forEach(function (t, i) {
+          var on = i === idx;
+          t.classList.toggle("is-active", on);
+          t.setAttribute("aria-selected", on ? "true" : "false");
+        });
+        wwdPanes.forEach(function (p, i) { p.classList.toggle("is-active", i === idx); });
+        wwdDots.forEach(function (d, i) { d.classList.toggle("is-active", i === idx); });
+      }
+      wwdTabs.forEach(function (t, i) {
+        t.addEventListener("click", function () { wwdShow(i); });
+      });
+      if (wwdNext) {
+        wwdNext.addEventListener("click", function () {
+          var current = -1;
+          wwdTabs.forEach(function (t, i) { if (t.classList.contains("is-active")) current = i; });
+          wwdShow((current + 1) % wwdTabs.length);
+        });
+      }
 
       /* =====================================================================
          CITY ATLAS  (approximate pixel coords inside the 1215 x 967 viewBox)
