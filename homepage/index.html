@@ -24,7 +24,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&family=DM+Sans:wght@500;600;700&family=Manrope:wght@500;600;700&family=Outfit:wght@500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet" />
 
   <style>
     /* ==========================================================================
@@ -231,6 +231,126 @@
     .btn--block { width:100%; }
     .btn .arrow { transition:transform var(--t-fast) var(--ease-out); }
     .btn:hover .arrow { transform:translateX(3px); }
+
+    /* ==========================================================================
+       SETTINGS POPOVER  (anchored to Sign In click)
+       ========================================================================== */
+    .nav__right { position:relative; }   /* anchor for popover */
+    .settings-popover {
+      position:absolute;
+      top:calc(100% + 12px); right:0;
+      width:min(380px, calc(100vw - 32px));
+      background:var(--c-bg);
+      color:var(--c-fg);
+      border:1px solid var(--c-line);
+      border-radius:var(--r-xl);
+      box-shadow:0 20px 60px rgba(10,10,20,0.25);
+      z-index:80;
+      max-height:min(80vh, 720px);
+      overflow:hidden;
+      display:flex; flex-direction:column;
+      animation:settings-pop 220ms var(--ease-out);
+    }
+    .settings-popover[hidden] { display:none; }
+    @keyframes settings-pop {
+      from { opacity:0; transform:translateY(-8px) scale(0.97); }
+      to   { opacity:1; transform:none; }
+    }
+    .settings-popover::before {
+      content:""; position:absolute;
+      top:-7px; right:32px; width:14px; height:14px;
+      background:var(--c-bg);
+      border-left:1px solid var(--c-line); border-top:1px solid var(--c-line);
+      transform:rotate(45deg);
+    }
+    .settings-popover__head {
+      display:flex; align-items:flex-start; gap:14px;
+      padding:18px 20px;
+      border-bottom:1px solid var(--c-line);
+    }
+    .settings-popover__head h3 {
+      font-size:0.9375rem; font-weight:600;
+      letter-spacing:-0.01em; color:var(--c-fg);
+      margin-bottom:3px;
+    }
+    .settings-popover__head p {
+      font-size:12px; line-height:1.5;
+      color:var(--c-fg-mute); max-width:30ch;
+    }
+    .settings-popover__close {
+      flex-shrink:0; width:28px; height:28px;
+      border-radius:var(--r-pill);
+      color:var(--c-fg-dim);
+      display:grid; place-items:center;
+      transition:background 140ms, color 140ms;
+    }
+    .settings-popover__close:hover { background:var(--c-bg-soft); color:var(--c-fg); }
+    .settings-popover__body {
+      overflow-y:auto;
+      padding:14px 16px 16px;
+    }
+    .settings-group {
+      padding:10px 4px;
+      border-bottom:1px solid var(--c-line-soft);
+    }
+    .settings-group:last-child { border-bottom:0; }
+    .settings-group__label {
+      display:block; padding:6px 8px 10px;
+      font-family:var(--font-mono);
+      font-size:10.5px; font-weight:500;
+      letter-spacing:0.12em; text-transform:uppercase;
+      color:var(--c-fg-dim);
+    }
+    .settings-options {
+      display:flex; flex-direction:column; gap:2px;
+      margin:0; padding:0; list-style:none;
+    }
+    .setting-btn {
+      display:flex; align-items:center; justify-content:space-between;
+      gap:8px; width:100%;
+      padding:10px 12px;
+      font-size:13px; text-align:left;
+      border-radius:var(--r-md);
+      transition:background 140ms, color 140ms;
+      cursor:pointer; color:var(--c-fg);
+    }
+    .setting-btn:hover { background:var(--c-bg-soft); }
+    .setting-btn.is-active {
+      background:rgba(216,27,93,0.08);
+      color:var(--c-brand-500);
+      font-weight:600;
+    }
+    .setting-btn__meta {
+      font-family:var(--font-mono); font-size:11px;
+      color:var(--c-fg-dim); flex-shrink:0;
+    }
+    .setting-btn.is-active .setting-btn__meta { color:var(--c-brand-500); }
+    .setting-btn__check {
+      width:18px; height:18px; flex-shrink:0;
+      color:var(--c-brand-500); opacity:0;
+      transition:opacity 140ms;
+    }
+    .setting-btn.is-active .setting-btn__check { opacity:1; }
+    .settings-popover__foot {
+      padding:12px 20px;
+      border-top:1px solid var(--c-line);
+      font-family:var(--font-mono); font-size:11px;
+      color:var(--c-fg-dim);
+      display:flex; align-items:center; gap:8px;
+      background:var(--c-bg-soft);
+    }
+    .settings-popover__foot::before {
+      content:""; width:6px; height:6px; border-radius:50%;
+      background:var(--c-success);
+    }
+    [data-settings-trigger].is-active {
+      background:rgba(255,255,255,0.12) !important;
+      color:#fff !important;
+    }
+
+    /* Variant slot wrapper — when a variant is active, default hero hides */
+    [data-original-hero][hidden] { display:none; }
+    [data-variant-slot] { /* nothing intrinsic; injected content carries its own styles */ }
 
     /* ==========================================================================
        NAV  (always dark on both themes)
@@ -1400,10 +1520,103 @@
           </svg>
         </button>
 
-        <a href="#" class="nav__sign">
+        <button type="button" class="nav__sign" data-settings-trigger aria-haspopup="dialog" aria-expanded="false">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           Sign In
-        </a>
+        </button>
+
+        <!-- Settings popover (opens when Sign In is clicked) -->
+        <div class="settings-popover" data-settings-popover role="dialog" aria-label="Display settings" hidden>
+          <header class="settings-popover__head">
+            <div style="flex:1">
+              <h3>Display settings</h3>
+              <p>Try different hero designs and headline fonts. Choices persist in your browser.</p>
+            </div>
+            <button class="settings-popover__close" type="button" aria-label="Close" data-settings-close>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+          </header>
+
+          <div class="settings-popover__body">
+            <section class="settings-group">
+              <span class="settings-group__label">Hero section design</span>
+              <ul class="settings-options" role="radiogroup" aria-label="Hero design">
+                <li><button class="setting-btn is-active" type="button" data-set-hero="default" role="radio" aria-checked="true">
+                  <span>Default · Map + Instacarrier form</span>
+                  <span class="setting-btn__meta">Current</span>
+                  <svg class="setting-btn__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </button></li>
+                <li><button class="setting-btn" type="button" data-set-hero="v1" role="radio" aria-checked="false">
+                  <span>V1 · Live Order Ticker</span>
+                  <svg class="setting-btn__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </button></li>
+                <li><button class="setting-btn" type="button" data-set-hero="v2" role="radio" aria-checked="false">
+                  <span>V2 · Massive Interactive Map</span>
+                  <svg class="setting-btn__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </button></li>
+                <li><button class="setting-btn" type="button" data-set-hero="v3" role="radio" aria-checked="false">
+                  <span>V3 · Terminal / API-first</span>
+                  <svg class="setting-btn__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </button></li>
+                <li><button class="setting-btn" type="button" data-set-hero="v4" role="radio" aria-checked="false">
+                  <span>V4 · Vehicle Gallery Picker</span>
+                  <svg class="setting-btn__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </button></li>
+                <li><button class="setting-btn" type="button" data-set-hero="v5" role="radio" aria-checked="false">
+                  <span>V5 · Conversational AI</span>
+                  <svg class="setting-btn__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </button></li>
+                <li><button class="setting-btn" type="button" data-set-hero="v6" role="radio" aria-checked="false">
+                  <span>V6 · Single Search Bar</span>
+                  <svg class="setting-btn__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </button></li>
+                <li><button class="setting-btn" type="button" data-set-hero="v7" role="radio" aria-checked="false">
+                  <span>V7 · Book / Integrate Toggle</span>
+                  <svg class="setting-btn__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </button></li>
+                <li><button class="setting-btn" type="button" data-set-hero="v8" role="radio" aria-checked="false">
+                  <span>V8 · Animated Price Counter</span>
+                  <svg class="setting-btn__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </button></li>
+              </ul>
+            </section>
+
+            <section class="settings-group">
+              <span class="settings-group__label">Headline font</span>
+              <ul class="settings-options" role="radiogroup" aria-label="Headline font">
+                <li><button class="setting-btn is-active" type="button" data-set-font="Space Grotesk" role="radio" aria-checked="true" style="font-family:'Space Grotesk', sans-serif">
+                  <span>Space Grotesk</span>
+                  <span class="setting-btn__meta">Default</span>
+                  <svg class="setting-btn__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </button></li>
+                <li><button class="setting-btn" type="button" data-set-font="Inter" role="radio" aria-checked="false" style="font-family:'Inter', sans-serif">
+                  <span>Inter</span>
+                  <svg class="setting-btn__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </button></li>
+                <li><button class="setting-btn" type="button" data-set-font="DM Sans" role="radio" aria-checked="false" style="font-family:'DM Sans', sans-serif">
+                  <span>DM Sans</span>
+                  <svg class="setting-btn__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </button></li>
+                <li><button class="setting-btn" type="button" data-set-font="Manrope" role="radio" aria-checked="false" style="font-family:'Manrope', sans-serif">
+                  <span>Manrope</span>
+                  <svg class="setting-btn__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </button></li>
+                <li><button class="setting-btn" type="button" data-set-font="Outfit" role="radio" aria-checked="false" style="font-family:'Outfit', sans-serif">
+                  <span>Outfit</span>
+                  <svg class="setting-btn__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </button></li>
+                <li><button class="setting-btn" type="button" data-set-font="Sora" role="radio" aria-checked="false" style="font-family:'Sora', sans-serif">
+                  <span>Sora</span>
+                  <svg class="setting-btn__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </button></li>
+              </ul>
+            </section>
+          </div>
+
+          <footer class="settings-popover__foot">
+            <span>Persisted locally · refreshes won't lose your picks</span>
+          </footer>
+        </div>
 
         <a href="#instacarrier" class="nav__cta">
           <div class="nav__cta-stack">
@@ -1421,7 +1634,10 @@
   <main id="main">
 
     <!-- ============== HERO ============== -->
-    <section class="hero" id="instacarrier">
+    <!-- Slot for swapped-in hero variants (Sign In → Display settings) -->
+    <div data-variant-slot></div>
+
+    <section class="hero" id="instacarrier" data-original-hero>
       <div class="container hero__inner">
 
         <div class="hero__copy reveal">
@@ -2413,6 +2629,150 @@ loyalty:     <span class="ok">+ 2 480 pts</span></div>
 
       function tickA() { fillCard(".route-card--a", nextForCard(cardARecent)); }
       function tickB() { fillCard(".route-card--b", nextForCard(cardBRecent)); }
+
+      /* =====================================================================
+         SETTINGS POPOVER (Sign In → Display settings panel)
+         ===================================================================== */
+      var trigger   = document.querySelector("[data-settings-trigger]");
+      var popover   = document.querySelector("[data-settings-popover]");
+      var closeBtn  = document.querySelector("[data-settings-close]");
+      var variantSlot = document.querySelector("[data-variant-slot]");
+      var originalHero = document.querySelector("[data-original-hero]");
+
+      function setOpen(open) {
+        if (!popover) return;
+        popover.hidden = !open;
+        if (trigger) {
+          trigger.classList.toggle("is-active", open);
+          trigger.setAttribute("aria-expanded", String(open));
+        }
+      }
+      function togglePopover() { setOpen(popover && popover.hidden); }
+      if (trigger) trigger.addEventListener("click", function (e) { e.preventDefault(); togglePopover(); });
+      if (closeBtn) closeBtn.addEventListener("click", function () { setOpen(false); });
+      document.addEventListener("click", function (e) {
+        if (!popover || popover.hidden) return;
+        if (popover.contains(e.target)) return;
+        if (trigger && trigger.contains(e.target)) return;
+        setOpen(false);
+      });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && popover && !popover.hidden) setOpen(false);
+      });
+
+      /* ------- Font swap (CSS --font-display) ------- */
+      function applyFont(name) {
+        var stack = (name === "Space Grotesk")
+          ? '"Space Grotesk", "Inter", system-ui, sans-serif'
+          : '"' + name + '", "Inter", system-ui, sans-serif';
+        document.documentElement.style.setProperty("--font-display", stack);
+        document.querySelectorAll("[data-set-font]").forEach(function (b) {
+          var on = b.dataset.setFont === name;
+          b.classList.toggle("is-active", on);
+          b.setAttribute("aria-checked", String(on));
+        });
+        try { localStorage.setItem("swida-headline-font", name); } catch (e) {}
+      }
+      document.querySelectorAll("[data-set-font]").forEach(function (b) {
+        b.addEventListener("click", function () { applyFont(b.dataset.setFont); });
+      });
+
+      /* ------- Hero variant fetch + inject ------- */
+      var variantStyleId = "variant-injected-styles";
+      var variantScriptId = "variant-injected-script";
+      var loadingVariant = false;
+
+      function setActiveVariantBtn(name) {
+        document.querySelectorAll("[data-set-hero]").forEach(function (b) {
+          var on = b.dataset.setHero === name;
+          b.classList.toggle("is-active", on);
+          b.setAttribute("aria-checked", String(on));
+        });
+      }
+      function clearVariant() {
+        var old = document.getElementById(variantStyleId);
+        if (old) old.remove();
+        var oldScript = document.getElementById(variantScriptId);
+        if (oldScript) oldScript.remove();
+        if (variantSlot) variantSlot.innerHTML = "";
+        if (originalHero) originalHero.hidden = false;
+      }
+
+      async function applyHeroVariant(name) {
+        if (loadingVariant) return;
+        if (name === "default") {
+          clearVariant();
+          setActiveVariantBtn("default");
+          try { localStorage.setItem("swida-hero-variant", "default"); } catch (e) {}
+          return;
+        }
+        loadingVariant = true;
+        try {
+          var resp = await fetch("hero-variants.html", { cache: "no-cache" });
+          if (!resp.ok) throw new Error("fetch failed: " + resp.status);
+          var html = await resp.text();
+          var doc = new DOMParser().parseFromString(html, "text/html");
+          var variantEl = doc.getElementById(name);
+          if (!variantEl) throw new Error("variant section not found: " + name);
+
+          // Strip the variant-head label
+          var head = variantEl.querySelector(".variant-head");
+          if (head) head.remove();
+
+          // Inject the variant CSS (just once per swap)
+          var srcStyle = doc.querySelector("style");
+          if (srcStyle) {
+            var styleEl = document.getElementById(variantStyleId);
+            if (!styleEl) {
+              styleEl = document.createElement("style");
+              styleEl.id = variantStyleId;
+              document.head.appendChild(styleEl);
+            }
+            styleEl.textContent = srcStyle.textContent;
+          }
+
+          // Hide the default hero, mount the variant
+          if (originalHero) originalHero.hidden = true;
+          variantSlot.innerHTML = "";
+          variantSlot.appendChild(variantEl);
+
+          // Run the variant scripts (creates the animations / intervals)
+          var oldScript = document.getElementById(variantScriptId);
+          if (oldScript) oldScript.remove();
+          var srcScript = doc.querySelector("script");
+          if (srcScript) {
+            var newScript = document.createElement("script");
+            newScript.id = variantScriptId;
+            newScript.textContent = srcScript.textContent;
+            document.body.appendChild(newScript);
+          }
+
+          setActiveVariantBtn(name);
+          try { localStorage.setItem("swida-hero-variant", name); } catch (e) {}
+          // Scroll the variant into view
+          variantSlot.scrollIntoView({ behavior: "smooth", block: "start" });
+        } catch (err) {
+          console.error("Failed to load hero variant", name, err);
+          alert("Couldn't load variant — open the page over HTTP (Pages or 'npx serve') for fetch to work.");
+        } finally {
+          loadingVariant = false;
+        }
+      }
+      document.querySelectorAll("[data-set-hero]").forEach(function (b) {
+        b.addEventListener("click", function () { applyHeroVariant(b.dataset.setHero); });
+      });
+
+      /* ------- Restore persisted settings on load ------- */
+      try {
+        var savedFont = localStorage.getItem("swida-headline-font");
+        if (savedFont) applyFont(savedFont);
+      } catch (e) {}
+      try {
+        var savedVariant = localStorage.getItem("swida-hero-variant");
+        if (savedVariant && savedVariant !== "default") {
+          applyHeroVariant(savedVariant);
+        }
+      } catch (e) {}
 
       /* =====================================================================
          STATS COUNTER (count-up animation when showcase enters viewport)
