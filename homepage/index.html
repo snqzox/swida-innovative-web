@@ -731,6 +731,104 @@
     }
 
     /* ==========================================================================
+       STATS SHOWCASE  (dramatic dark card replacing the plain .stats grid)
+       ========================================================================== */
+    .stats-showcase {
+      position:relative; overflow:hidden;
+      background:
+        radial-gradient(70% 90% at 0% 0%, rgba(216,27,93,0.22), transparent 55%),
+        radial-gradient(70% 90% at 100% 100%, rgba(91,141,239,0.18), transparent 55%),
+        #0A0A12;
+      color:#fff;
+      border-radius:var(--r-2xl);
+      padding:clamp(40px, 6vw, 72px) clamp(28px, 5vw, 64px);
+      box-shadow:0 30px 80px rgba(0,0,0,0.35);
+    }
+    .stats-showcase::before {
+      content:""; position:absolute; inset:0;
+      background-image:radial-gradient(circle, rgba(255,255,255,0.07) 1.3px, transparent 1.6px);
+      background-size:14px 14px;
+      mask-image:radial-gradient(ellipse 90% 70% at 50% 50%, #000, transparent 80%);
+      -webkit-mask-image:radial-gradient(ellipse 90% 70% at 50% 50%, #000, transparent 80%);
+      pointer-events:none;
+    }
+    .stats-showcase > * { position:relative; z-index:1; }
+
+    .stats-showcase__head { text-align:center; margin-bottom:48px; }
+    .stats-showcase__head .eyebrow {
+      color:var(--c-brand-300); justify-content:center; display:inline-flex;
+    }
+    .stats-showcase__head .eyebrow::before {
+      background:var(--c-brand-300);
+      box-shadow:0 0 12px var(--c-brand-300);
+    }
+    .stats-showcase__head h2 {
+      color:#fff; margin-top:16px;
+      font-size:clamp(1.5rem, 3vw, 2.25rem);
+    }
+    .stats-showcase__head h2 .pink { color:var(--c-brand-300); }
+
+    .stats-showcase__grid {
+      display:grid; grid-template-columns:1fr; gap:48px;
+      align-items:start;
+    }
+    @media (min-width: 720px) {
+      .stats-showcase__grid {
+        grid-template-columns:repeat(3, 1fr);
+        gap:0;
+      }
+    }
+
+    .stat-tile {
+      position:relative;
+      text-align:center;
+      padding:0 clamp(12px, 3vw, 32px);
+    }
+    @media (min-width: 720px) {
+      .stat-tile + .stat-tile::before {
+        content:""; position:absolute;
+        left:0; top:14%; bottom:14%;
+        width:1px;
+        background:linear-gradient(to bottom, transparent, rgba(255,255,255,0.18) 25%, rgba(255,255,255,0.18) 75%, transparent);
+      }
+    }
+    .stat-tile__icon {
+      width:56px; height:56px; margin:0 auto 22px;
+      border-radius:50%;
+      background:rgba(216,27,93,0.16);
+      border:1px solid rgba(216,27,93,0.38);
+      display:grid; place-items:center;
+      color:var(--c-brand-300);
+      box-shadow:0 8px 24px rgba(216,27,93,0.25);
+    }
+    .stat-tile__icon svg { width:24px; height:24px; }
+
+    .stat-tile__value {
+      font-family:var(--font-display);
+      font-size:clamp(2.5rem, 6vw, 4rem);
+      font-weight:700;
+      letter-spacing:-0.03em;
+      line-height:1;
+      display:inline-flex; align-items:baseline; gap:4px;
+      color:#fff;
+    }
+    .stat-tile__value .num { color:var(--c-brand-300); }
+    .stat-tile__value .suffix {
+      font-family:var(--font-display);
+      font-size:0.5em;
+      font-weight:500;
+      color:rgba(255,255,255,0.65);
+      letter-spacing:0;
+    }
+    .stat-tile__label {
+      margin-top:16px;
+      font-family:var(--font-mono);
+      font-size:12px; letter-spacing:0.12em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,0.55);
+    }
+
+    /* ==========================================================================
        FINAL CTA
        ========================================================================== */
     .cta {
@@ -1741,13 +1839,60 @@ loyalty:     <span class="ok">+ 2 480 pts</span></div>
       </div>
     </section>
 
-    <!-- ============== STATS ============== -->
+    <!-- ============== STATS (Round 2 polish: dark showcase card with icons + animated counters) ============== -->
     <section class="section--tight" id="company">
       <div class="container">
-        <div class="stats reveal" role="list">
-          <div role="listitem"><div class="stat__value"><span class="pink">10</span>&nbsp;yrs</div><div class="stat__label">Moving European freight</div></div>
-          <div role="listitem"><div class="stat__value"><span class="pink">40</span>&nbsp;k+</div><div class="stat__label">Transports per year</div></div>
-          <div role="listitem"><div class="stat__value"><span class="pink">98.4</span>%</div><div class="stat__label">On-time delivery</div></div>
+        <div class="stats-showcase reveal">
+          <header class="stats-showcase__head">
+            <span class="eyebrow">Track record</span>
+            <h2 style="margin-top:14px">A decade of European freight,<br />in <span class="pink">three numbers.</span></h2>
+          </header>
+
+          <div class="stats-showcase__grid" role="list">
+            <div class="stat-tile" role="listitem">
+              <div class="stat-tile__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </div>
+              <div class="stat-tile__value">
+                <span class="num" data-target="10" data-decimals="0">10</span>
+                <span class="suffix">yrs</span>
+              </div>
+              <div class="stat-tile__label">Moving European freight</div>
+            </div>
+
+            <div class="stat-tile" role="listitem">
+              <div class="stat-tile__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="1" y="6" width="14" height="11" rx="1"/>
+                  <path d="M15 9h4l3 4v4h-7"/>
+                  <circle cx="5.5" cy="18.5" r="1.7"/>
+                  <circle cx="18.5" cy="18.5" r="1.7"/>
+                </svg>
+              </div>
+              <div class="stat-tile__value">
+                <span class="num" data-target="40" data-decimals="0">40</span>
+                <span class="suffix">k+</span>
+              </div>
+              <div class="stat-tile__label">Transports per year</div>
+            </div>
+
+            <div class="stat-tile" role="listitem">
+              <div class="stat-tile__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="7 12 11 16 17 8"/>
+                </svg>
+              </div>
+              <div class="stat-tile__value">
+                <span class="num" data-target="98.4" data-decimals="1">98.4</span>
+                <span class="suffix">%</span>
+              </div>
+              <div class="stat-tile__label">On-time delivery</div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -2208,6 +2353,45 @@ loyalty:     <span class="ok">+ 2 480 pts</span></div>
 
       function tickA() { fillCard(".route-card--a", nextForCard(cardARecent)); }
       function tickB() { fillCard(".route-card--b", nextForCard(cardBRecent)); }
+
+      /* =====================================================================
+         STATS COUNTER (count-up animation when showcase enters viewport)
+         ===================================================================== */
+      var statNums = document.querySelectorAll(".stat-tile__value .num");
+      function animateCount(el) {
+        var target = parseFloat(el.dataset.target);
+        var decimals = parseInt(el.dataset.decimals || "0", 10);
+        var duration = 1500;
+        var t0 = performance.now();
+        function step(now) {
+          var p = Math.min((now - t0) / duration, 1);
+          var eased = 1 - Math.pow(1 - p, 3);  // easeOutCubic
+          var v = target * eased;
+          el.textContent = decimals > 0 ? v.toFixed(decimals) : Math.floor(v).toString();
+          if (p < 1) requestAnimationFrame(step);
+          else el.textContent = decimals > 0 ? target.toFixed(decimals) : String(target);
+        }
+        requestAnimationFrame(step);
+      }
+      if (statNums.length) {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          // Skip animation, just set final values
+          statNums.forEach(function (el) {
+            var d = parseInt(el.dataset.decimals || "0", 10);
+            var t = parseFloat(el.dataset.target);
+            el.textContent = d > 0 ? t.toFixed(d) : String(t);
+          });
+        } else if ("IntersectionObserver" in window) {
+          // Reset to 0 first so the animation has somewhere to start from
+          statNums.forEach(function (el) { el.textContent = "0"; });
+          var statIo = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) { animateCount(e.target); statIo.unobserve(e.target); }
+            });
+          }, { threshold: 0.4 });
+          statNums.forEach(function (el) { statIo.observe(el); });
+        }
+      }
 
       /* =====================================================================
          BOOT
