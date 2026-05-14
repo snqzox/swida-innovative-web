@@ -15,18 +15,18 @@ Legend: `[ ]` pending · `[~]` in progress · `[x]` done · `[?]` blocked / need
 
 ### 🔴 Removals (low risk, do first)
 
-- [ ] **Clients trust strip** — remove the *"Moving freight for 600+ European brands"* row with Volkswagen Group / Schaeffler / Continental / Faurecia / ZF / Magna / Mahle. Client wants it gone.
-- [ ] **EY Entrepreneur Of The Year** award card — remove from Recognition section. Forbes stays. Layout becomes either one centered award card, or Forbes + Google review badge in a tidier composition.
-- [ ] **AVG quote response `< 30 min`** info-card stat — remove. Contradicts the instant Instacarrier pricing claim.
+- [x] **Clients trust strip** — done. Volkswagen / Schaeffler / Continental / Faurecia / ZF / Magna / Mahle row removed.
+- [x] **EY Entrepreneur Of The Year** award card — done. Recognition section now shows only Forbes, centered via `.recognition__grid--solo` modifier (capped width 560 px).
+- [x] **AVG quote response `< 30 min`** info-card stat — done. Stats grid switched from 4 → 3 columns.
 
 ### 🟡 Small edits (numbers, labels, copy)
 
-- [ ] Info card: `82 k Shipments completed` → `40 k+ transports per year`
-- [ ] Info card: `12 yrs Moving European freight` → `10 yrs`
-- [ ] Services tab content (Express Transports panel): change stat `1 minute · Price quote` → `24/7 · Pricing` *(client wants to see how it looks; can revisit)*
-- [ ] InstaCarrier hero form: add **email input** under "Delivery location" — mirroring the original Klára design ([Figma reference](https://www.figma.com/design/H23Hukc2xjOBPzKrPlKZQZ/Webicek---SWIDA?node-id=1-2718))
-- [ ] InstaCarrier hero form: add **"Connect via API"** affordance on/under the form (was visible on the original Klára design)
-- [ ] Truck banner ("One network. Every European border.") — either reframe with a clearer message, or remove. *Client comment: "Vizuál bez jasného posolstva len zaberá scroll."*
+- [x] Info card: `82 k Shipments completed` → `40 k+ Transports per year`
+- [x] Info card: `12 yrs` → `10 yrs`
+- [x] Services tab content (Express Transports panel): stat `1 minute · Price quote` → `24/7 · Pricing`
+- [x] InstaCarrier hero form: **email input** added below "Delivery location" with an envelope icon. New CSS modifier `.lane__field--detached` keeps the dashed pickup→delivery connector from extending through the email row.
+- [x] InstaCarrier hero form: **"Or connect Instacarrier via API — quotes, booking, status callbacks, EDI invoicing"** affordance added as a soft pink/blue gradient pill (`.hero__api`) below the form, above the trust line.
+- [?] Truck banner ("One network. Every European border.") — **decision pending**; tracked in the Strategic decisions section.
 
 ### 🔵 Restructure — Touchpoints section (biggest content change)
 
