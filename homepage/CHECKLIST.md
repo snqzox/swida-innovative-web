@@ -42,9 +42,15 @@ Kept the existing grid styling; **expanded 4 → 6 cards** that follow the `How 
 
 Each card carries a monospace `.touch__viz` artifact (JSON, log, event handler, dashboard snapshot) so the tech-first claim has a concrete visual.
 
-### 🟢 New section to add
+### 🟢 New section to add — DONE
 
-- [ ] **People section** — was in the original Klára design, content stays, but **graficky urobiť krajšie**. Doesn't need to be tied to info cards. Decide placement (likely between Touchpoints and final CTA).
+- [x] **People section** — added as `<section class="section section--soft" id="people">` between Truck banner and Stats. 4 leadership cards in a responsive grid (1col / 2col / 4col). Each card is portrait (gradient circle + initials, no real photos yet) + name + role + 1-line bio. Placeholder names:
+  - **Andrej Novák** — CEO & Founder
+  - **Lucia Horváthová** — Head of Operations
+  - **Marek Tóth** — Head of Engineering
+  - **Jana Kováčová** — Head of Growth
+
+  Client will swap names + roles + bios with the real team when ready. Real portraits can be inlined as base64 the same way the EY / Forbes / Google / Express illustrations were inlined for preview compatibility.
 
 ### ❓ Strategic decisions — RESOLVED
 

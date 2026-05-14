@@ -653,6 +653,63 @@
     .touch__viz .com { color:#6E6E84; }
 
     /* ==========================================================================
+       PEOPLE (leadership row — Round 2)
+       ========================================================================== */
+    .people {
+      display:grid; grid-template-columns:1fr; gap:24px;
+    }
+    @media (min-width: 720px)  { .people { grid-template-columns:repeat(2, 1fr); gap:28px; } }
+    @media (min-width: 1100px) { .people { grid-template-columns:repeat(4, 1fr); } }
+
+    .person {
+      text-align:center;
+      padding:32px 24px 28px;
+      background:var(--c-bg);
+      border:1px solid var(--c-line);
+      border-radius:var(--r-xl);
+      transition:transform var(--t-base) var(--ease-out), box-shadow var(--t-base) var(--ease-out);
+    }
+    .person:hover { transform:translateY(-4px); box-shadow:var(--shadow-lift); }
+
+    .person__portrait {
+      position:relative;
+      width:112px; height:112px;
+      margin:0 auto 18px;
+      border-radius:50%;
+      display:grid; place-items:center;
+      overflow:hidden;
+    }
+    .person__portrait::after {
+      content:""; position:absolute; inset:0; border-radius:inherit;
+      box-shadow:inset 0 0 0 2px rgba(255,255,255,0.18), inset 0 -8px 16px rgba(0,0,0,0.15);
+    }
+    .person__initials {
+      position:relative; z-index:1;
+      font-family:var(--font-display);
+      font-size:36px; font-weight:700;
+      letter-spacing:-0.02em; color:#fff;
+      text-shadow:0 1px 2px rgba(0,0,0,0.18);
+    }
+    .person__name {
+      font-family:var(--font-display);
+      font-size:1.125rem; font-weight:600;
+      letter-spacing:-0.01em; color:var(--c-fg);
+      margin-bottom:4px;
+    }
+    .person__role {
+      font-family:var(--font-mono);
+      font-size:11px; letter-spacing:0.12em;
+      text-transform:uppercase;
+      color:var(--c-brand-500);
+      margin-bottom:14px;
+    }
+    .person__bio {
+      font-size:14px; line-height:1.6;
+      color:var(--c-fg-mute);
+      max-width:32ch; margin-inline:auto;
+    }
+
+    /* ==========================================================================
        STATS
        ========================================================================== */
     .stats {
@@ -1630,6 +1687,55 @@ on-time:     <span class="ok">98.4%</span>
 damage rate: <span class="ok">0.18%</span>
 top lane:    <span class="br">BTS → LYS</span>  €&nbsp;1&nbsp;180 avg
 loyalty:     <span class="ok">+ 2 480 pts</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== PEOPLE (leadership — placeholder names, client will replace) ============== -->
+    <section class="section section--soft" id="people">
+      <div class="container">
+        <header class="feature-head reveal">
+          <span class="eyebrow">The people</span>
+          <h2 style="margin-top:20px">Real humans behind <span class="pink">the pipeline.</span></h2>
+          <p class="lead" style="margin-top:18px">Software does the heavy lifting — but every shipment is owned by someone who picks up the phone. Meet the people who keep your freight moving.</p>
+        </header>
+
+        <div class="people">
+          <article class="person reveal">
+            <div class="person__portrait" style="background:linear-gradient(135deg, #FF6D9C 0%, #D81B5D 100%);">
+              <span class="person__initials" aria-hidden="true">AN</span>
+            </div>
+            <h3 class="person__name">Andrej Novák</h3>
+            <p class="person__role">CEO &amp; Founder</p>
+            <p class="person__bio">10 years in European road freight. Started Swida because the market needed an e-shop for trucks — and nobody else was building one.</p>
+          </article>
+
+          <article class="person reveal">
+            <div class="person__portrait" style="background:linear-gradient(135deg, #82AAFF 0%, #5B8DEF 100%);">
+              <span class="person__initials" aria-hidden="true">LH</span>
+            </div>
+            <h3 class="person__name">Lucia Horváthová</h3>
+            <p class="person__role">Head of Operations</p>
+            <p class="person__bio">Runs the Bratislava dispatch desk. If your truck has a problem at 3 AM, she's the one driving the fix back into the system.</p>
+          </article>
+
+          <article class="person reveal">
+            <div class="person__portrait" style="background:linear-gradient(135deg, #C084FC 0%, #D81B5D 100%);">
+              <span class="person__initials" aria-hidden="true">MT</span>
+            </div>
+            <h3 class="person__name">Marek Tóth</h3>
+            <p class="person__role">Head of Engineering</p>
+            <p class="person__bio">Builds the systems that make Instacarrier feel instant. Background in TMS platforms before joining Swida.</p>
+          </article>
+
+          <article class="person reveal">
+            <div class="person__portrait" style="background:linear-gradient(135deg, #FBA94B 0%, #E83A75 100%);">
+              <span class="person__initials" aria-hidden="true">JK</span>
+            </div>
+            <h3 class="person__name">Jana Kováčová</h3>
+            <p class="person__role">Head of Growth</p>
+            <p class="person__bio">Brings new clients on board and keeps the existing ones happy. The reason 98.4% of shipments arrive on time.</p>
           </article>
         </div>
       </div>
