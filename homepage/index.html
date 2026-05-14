@@ -1097,27 +1097,47 @@
     .wwd__quote-bar-text p { font-size:14px; color:var(--c-fg-mute); }
 
     /* ==========================================================================
-       TRUCK BANNER (full-bleed photo with overlay text)
+       TRUCK BANNER (single dark base + subtle desaturated photo on the right)
        ========================================================================== */
     .truck-banner {
       position:relative;
-      min-height:clamp(360px, 50vw, 520px);
-      background:#0A0A12 url('https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=2400&q=70') center/cover no-repeat;
+      min-height:clamp(420px, 50vw, 540px);
+      background:#0A0A12;          /* single-color base */
       overflow:hidden;
     }
+    /* Photo layer: grayscale, dim, right-anchored, fades to invisible on the left. */
     .truck-banner::before {
       content:""; position:absolute; inset:0;
-      background:
-        linear-gradient(90deg, rgba(7,7,12,0.92) 0%, rgba(7,7,12,0.55) 45%, transparent 75%),
-        linear-gradient(180deg, transparent 60%, rgba(7,7,12,0.45) 100%);
+      background-image:url('https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=2400&q=70');
+      background-repeat:no-repeat;
+      background-size:cover;
+      background-position:right center;
+      filter:grayscale(1) brightness(0.55) contrast(1.05);
+      opacity:0.30;
+      mask-image:linear-gradient(to right, transparent 0%, transparent 38%, rgba(0,0,0,0.4) 58%, #000 88%);
+      -webkit-mask-image:linear-gradient(to right, transparent 0%, transparent 38%, rgba(0,0,0,0.4) 58%, #000 88%);
+      pointer-events:none;
     }
+    @media (max-width: 720px) {
+      .truck-banner::before {
+        opacity:0.16;
+        mask-image:linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.35) 60%, #000 100%);
+        -webkit-mask-image:linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.35) 60%, #000 100%);
+      }
+    }
+
+    /* Inner content — constrained to the left ~52% so it never crosses
+       into the visible portion of the photo. */
     .truck-banner__inner {
       position:relative; z-index:1;
       display:grid; align-content:center;
       min-height:inherit;
       padding-block: clamp(56px, 8vw, 96px);
       color:#fff;
+      max-width:clamp(420px, 52vw, 600px);
     }
+    @media (max-width: 720px) { .truck-banner__inner { max-width:100%; } }
+
     .truck-banner__inner .eyebrow { color:var(--c-brand-300); }
     .truck-banner__inner .eyebrow::before { background:var(--c-brand-300); box-shadow:0 0 12px var(--c-brand-300); }
     .truck-banner__inner h2 {
@@ -1127,14 +1147,14 @@
     }
     .truck-banner__inner p {
       color:rgba(255,255,255,0.78);
-      max-width:48ch; font-size:1.0625rem; line-height:1.6;
+      max-width:42ch; font-size:1.0625rem; line-height:1.6;
     }
     .truck-banner__inner .btn { margin-top:32px; }
     .truck-banner__stats {
-      display:grid; grid-template-columns:repeat(3, auto); gap:clamp(20px, 4vw, 48px);
+      display:grid; grid-template-columns:repeat(3, auto); gap:clamp(16px, 3vw, 36px);
       margin-top:32px; padding-top:28px;
       border-top:1px solid rgba(255,255,255,0.18);
-      max-width:fit-content;
+      justify-content:start;
     }
     .truck-banner__stats > [role="listitem"] { display:grid; gap:4px; }
     .truck-banner__stats strong {
@@ -1713,21 +1733,23 @@
       </div>
     </section>
 
-    <!-- ============== TRUCK BANNER (full-bleed photo, Round 2: concrete numbers) ============== -->
+    <!-- ============== TRUCK BANNER (single-color base, photo as subtle right-side atmosphere) ============== -->
     <section class="truck-banner" aria-label="European freight network by Swida">
-      <div class="container truck-banner__inner reveal">
-        <span class="eyebrow">European reach, in numbers</span>
-        <h2>24/7 dispatch.<br />35 countries.<br />25 000 trucks.</h2>
-        <p>An always-on carrier network across every major European corridor — with a Bratislava dispatch desk that picks up the phone at 03:00 if your truck does.</p>
-        <div class="truck-banner__stats" role="list">
-          <div role="listitem"><strong>24/7</strong><span>Dispatch desk &amp; tracking</span></div>
-          <div role="listitem"><strong>35</strong><span>European countries covered</span></div>
-          <div role="listitem"><strong>25 000+</strong><span>Carriers in the network</span></div>
+      <div class="container">
+        <div class="truck-banner__inner reveal">
+          <span class="eyebrow">European reach, in numbers</span>
+          <h2>24/7 dispatch.<br />35 countries.<br />25 000 trucks.</h2>
+          <p>An always-on carrier network across every major European corridor — with a Bratislava dispatch desk that picks up the phone at 03:00 if your truck does.</p>
+          <div class="truck-banner__stats" role="list">
+            <div role="listitem"><strong>24/7</strong><span>Dispatch desk &amp; tracking</span></div>
+            <div role="listitem"><strong>35</strong><span>European countries covered</span></div>
+            <div role="listitem"><strong>25 000+</strong><span>Carriers in the network</span></div>
+          </div>
+          <a href="#instacarrier" class="btn btn--primary btn--lg">
+            Price a shipment now
+            <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
         </div>
-        <a href="#instacarrier" class="btn btn--primary btn--lg">
-          Price a shipment now
-          <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-        </a>
       </div>
     </section>
 
