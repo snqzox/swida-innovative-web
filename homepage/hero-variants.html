@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Swida — 8 Hero Variants for Review</title>
+  <meta name="description" content="Eight creative hero-section directions for the Swida Innovative homepage. Pick the one that fits best." />
+  <meta name="theme-color" content="#0A0A12" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============= SHARED TOKENS ============= */
+    :root {
+      --c-brand-100:#FFD9E5; --c-brand-200:#FFA8C3; --c-brand-300:#FF6D9C;
+      --c-brand-400:#E83A75; --c-brand-500:#D81B5D; --c-brand-600:#B71250;
+      --c-bg:#FFFFFF; --c-bg-soft:#F7F8FB; --c-bg-tint:#FAFBFD;
+      --c-bg-dark:#0A0A12; --c-bg-dark-2:#11121C;
+      --c-line:#E5E6ED; --c-line-soft:#EFF0F4; --c-line-strong:#D6D8E1;
+      --c-fg:#0A0A12; --c-fg-mute:#52546A; --c-fg-dim:#8A8DA0; --c-fg-faint:#BCBECC;
+      --c-accent:#5B8DEF; --c-success:#10B981; --c-warning:#F59E0B;
+      --font-sans:"Inter", system-ui, sans-serif;
+      --font-display:"Space Grotesk", "Inter", system-ui, sans-serif;
+      --font-mono:"JetBrains Mono", "SF Mono", ui-monospace, "Menlo", monospace;
+      --r-sm:6px; --r-md:10px; --r-lg:14px; --r-xl:20px; --r-2xl:28px; --r-pill:999px;
+      --shadow-card:0 1px 2px rgba(10,10,20,0.04), 0 8px 24px rgba(10,10,20,0.06);
+      --shadow-lift:0 4px 12px rgba(10,10,20,0.06), 0 24px 56px rgba(10,10,20,0.10);
+      --shadow-pink:0 8px 24px rgba(216,27,93,0.28);
+      --ease-out:cubic-bezier(0.16,1,0.3,1);
+      --container:1280px;
+      --pad:clamp(20px,5vw,56px);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *,*::before,*::after { animation-duration:0.001ms!important; animation-iteration-count:1!important; transition-duration:0.001ms!important; }
+    }
+
+    /* ============= RESET ============= */
+    *,*::before,*::after { box-sizing:border-box; }
+    html,body { margin:0; padding:0; }
+    html { scroll-behavior:smooth; }
+    body {
+      font-family:var(--font-sans); font-size:16px; line-height:1.5;
+      color:var(--c-fg); background:var(--c-bg);
+      -webkit-font-smoothing:antialiased; overflow-x:hidden;
+    }
+    img, svg { display:block; max-width:100%; }
+    button { font:inherit; color:inherit; background:none; border:0; cursor:pointer; }
+    a { color:inherit; text-decoration:none; }
+    input { font:inherit; color:inherit; border:0; outline:none; background:transparent; }
+    h1, h2, h3, h4 { margin:0; font-family:var(--font-display); font-weight:600; letter-spacing:-0.02em; line-height:1.05; }
+    p { margin:0; color:var(--c-fg-mute); }
+    :focus-visible { outline:2px solid var(--c-brand-500); outline-offset:2px; }
+
+    .container { max-width:var(--container); padding-inline:var(--pad); margin-inline:auto; }
+    .eyebrow {
+      display:inline-flex; align-items:center; gap:8px;
+      font-family:var(--font-mono); font-size:12px; font-weight:500;
+      text-transform:uppercase; letter-spacing:0.14em;
+      color:var(--c-brand-500);
+    }
+    .eyebrow::before { content:""; width:6px; height:6px; border-radius:50%; background:var(--c-brand-500); }
+    .pink { color:var(--c-brand-500); }
+    .btn {
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      padding:14px 22px; font-weight:600; font-size:14px;
+      border-radius:var(--r-pill); white-space:nowrap; line-height:1;
+      transition:transform 140ms var(--ease-out), background 140ms var(--ease-out), color 140ms var(--ease-out), box-shadow 140ms var(--ease-out);
+    }
+    .btn:hover { transform:translateY(-1px); }
+    .btn--primary { background:var(--c-brand-500); color:#fff; box-shadow:var(--shadow-pink); }
+    .btn--primary:hover { background:var(--c-brand-400); }
+    .btn--ghost { color:var(--c-fg); border:1px solid var(--c-line-strong); }
+    .btn--lg { padding:18px 28px; font-size:16px; }
+
+    /* ============= TOP NAV ============= */
+    .vnav {
+      position:sticky; top:0; z-index:100;
+      background:rgba(10,10,18,0.92); backdrop-filter:blur(14px);
+      color:#fff; border-bottom:1px solid #1a1b27;
+    }
+    .vnav__inner { display:flex; align-items:center; justify-content:space-between; gap:24px; height:64px; }
+    .vnav__back {
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:13px; font-weight:500; color:rgba(255,255,255,0.8);
+      transition:color 140ms var(--ease-out);
+    }
+    .vnav__back:hover { color:#fff; }
+    .vnav__title { font-family:var(--font-display); font-weight:600; font-size:14px; color:#fff; }
+    .vnav__pills { display:none; gap:6px; align-items:center; font-family:var(--font-mono); font-size:11.5px; }
+    .vnav__pill {
+      padding:6px 10px; border-radius:var(--r-pill);
+      color:rgba(255,255,255,0.6);
+      transition:color 140ms, background 140ms;
+    }
+    .vnav__pill:hover { background:rgba(255,255,255,0.08); color:#fff; }
+    @media (min-width: 900px) { .vnav__pills { display:inline-flex; } }
+
+    /* ============= INTRO ============= */
+    .vintro {
+      background:var(--c-bg-dark); color:#fff;
+      padding-block:clamp(56px,7vw,96px);
+      position:relative; overflow:hidden;
+    }
+    .vintro::before {
+      content:""; position:absolute; inset:0;
+      background-image:radial-gradient(circle, rgba(255,255,255,0.05) 1.3px, transparent 1.6px);
+      background-size:18px 18px;
+      mask-image:radial-gradient(ellipse 70% 80% at 50% 50%, #000, transparent 80%);
+      -webkit-mask-image:radial-gradient(ellipse 70% 80% at 50% 50%, #000, transparent 80%);
+      pointer-events:none;
+    }
+    .vintro__inner { position:relative; z-index:1; max-width:760px; }
+    .vintro h1 { color:#fff; font-size:clamp(2.25rem,4.5vw,3.5rem); margin-block:14px 24px; }
+    .vintro h1 .pink { color:var(--c-brand-300); }
+    .vintro p { color:rgba(255,255,255,0.72); font-size:18px; line-height:1.65; max-width:60ch; }
+
+    /* ============= VARIANT WRAPPER ============= */
+    .variant { padding-block:clamp(48px,6vw,80px); border-bottom:1px solid var(--c-line-soft); position:relative; }
+    .variant--dark { background:var(--c-bg-dark); color:#fff; }
+    .variant--soft { background:var(--c-bg-soft); }
+    .variant--tint { background:linear-gradient(180deg, var(--c-bg) 0%, var(--c-bg-soft) 100%); }
+    .variant-head { display:flex; align-items:flex-start; gap:18px; margin-bottom:36px; }
+    .variant-num {
+      flex-shrink:0; width:56px; height:56px; border-radius:var(--r-md);
+      background:var(--c-bg-dark); color:#fff;
+      display:grid; place-items:center;
+      font-family:var(--font-display); font-weight:700; font-size:18px; letter-spacing:-0.02em;
+    }
+    .variant--dark .variant-num { background:rgba(255,255,255,0.10); color:#fff; }
+    .variant-title { font-size:clamp(1.5rem, 2.4vw, 1.875rem); letter-spacing:-0.02em; }
+    .variant--dark .variant-title { color:#fff; }
+    .variant-desc { margin-top:6px; font-size:14px; color:var(--c-fg-mute); max-width:60ch; }
+    .variant--dark .variant-desc { color:rgba(255,255,255,0.65); }
+    .variant-tag {
+      display:inline-flex; align-items:center; gap:6px;
+      font-family:var(--font-mono); font-size:11px;
+      letter-spacing:0.08em; text-transform:uppercase;
+      color:var(--c-brand-500);
+      padding:4px 10px; border-radius:var(--r-pill);
+      background:rgba(216,27,93,0.10);
+      border:1px solid rgba(216,27,93,0.22);
+      margin-bottom:6px;
+    }
+    .variant--dark .variant-tag {
+      color:var(--c-brand-300);
+      background:rgba(216,27,93,0.16);
+      border-color:rgba(216,27,93,0.38);
+    }
+
+    /* ============= REUSABLE HERO BASE ============= */
+    .hero-base { display:grid; grid-template-columns:1fr; gap:36px; align-items:center; }
+    @media (min-width: 1080px) { .hero-base { grid-template-columns:1fr 1fr; gap:48px; } }
+    .hero-copy { max-width:560px; }
+    .hero-copy h1 { font-size:clamp(2.25rem, 4.4vw, 3.5rem); margin-block:18px 18px; }
+    .hero-copy h1 .pink { color:var(--c-brand-500); }
+    .variant--dark .hero-copy h1 { color:#fff; }
+    .variant--dark .hero-copy h1 .pink { color:var(--c-brand-300); }
+    .hero-copy .sub { font-size:1.0625rem; line-height:1.65; color:var(--c-fg-mute); max-width:48ch; }
+    .variant--dark .hero-copy .sub { color:rgba(255,255,255,0.72); }
+
+    /* ============= V1 — LIVE TICKER ============= */
+    .v1-ticker {
+      position:relative; background:var(--c-bg);
+      border:1px solid var(--c-line); border-radius:var(--r-xl);
+      box-shadow:var(--shadow-lift); padding:20px;
+      overflow:hidden; height:460px;
+      mask-image:linear-gradient(180deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+      -webkit-mask-image:linear-gradient(180deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+    }
+    .v1-ticker__head {
+      display:flex; align-items:center; justify-content:space-between;
+      padding-bottom:14px; border-bottom:1px solid var(--c-line); margin-bottom:8px;
+    }
+    .v1-ticker__title {
+      display:flex; align-items:center; gap:10px;
+      font-family:var(--font-mono); font-size:12px;
+      letter-spacing:0.12em; text-transform:uppercase; color:var(--c-fg-dim);
+    }
+    .v1-ticker__title::before {
+      content:""; width:8px; height:8px; border-radius:50%;
+      background:var(--c-success); animation:v1-pulse 1.6s ease-out infinite;
+    }
+    @keyframes v1-pulse { 0%, 100% { opacity:1; transform:scale(1); } 50% { opacity:0.5; transform:scale(1.4); } }
+    .v1-ticker__count { font-family:var(--font-mono); font-size:11.5px; color:var(--c-fg-dim); }
+    .v1-ticker__list { display:flex; flex-direction:column; gap:4px; }
+    .v1-row {
+      display:grid; align-items:center; gap:12px;
+      padding:14px 8px; border-bottom:1px solid var(--c-line-soft);
+      animation:v1-slidein 600ms var(--ease-out);
+    }
+    @keyframes v1-slidein { from { opacity:0; transform:translateY(-12px); } to { opacity:1; transform:translateY(0); } }
+    .v1-row__time { font-family:var(--font-mono); font-size:11.5px; color:var(--c-fg-dim); }
+    .v1-row__lane { font-size:13.5px; font-weight:600; color:var(--c-fg); letter-spacing:-0.01em; }
+    .v1-row__lane .arrow { color:var(--c-brand-500); margin-inline:4px; }
+    .v1-row__vehicle { font-family:var(--font-mono); font-size:11px; color:var(--c-fg-dim); }
+    .v1-row__price { font-family:var(--font-display); font-weight:700; font-size:14.5px; color:var(--c-fg); letter-spacing:-0.01em; }
+    .v1-row__status {
+      display:inline-flex; align-items:center; gap:5px;
+      font-family:var(--font-mono); font-size:10.5px;
+      padding:3px 8px; border-radius:var(--r-pill);
+    }
+    .v1-row__status--booked    { color:var(--c-brand-500); background:rgba(216,27,93,0.10); }
+    .v1-row__status--transit   { color:var(--c-accent);    background:rgba(91,141,239,0.10); }
+    .v1-row__status--delivered { color:var(--c-success);   background:rgba(16,185,129,0.10); }
+
+    /* ============= V2 — MASSIVE MAP ============= */
+    .v2-stage {
+      position:relative; min-height:clamp(520px, 70vh, 680px);
+      background:radial-gradient(60% 80% at 50% 50%, rgba(216,27,93,0.07), transparent 60%), var(--c-bg-soft);
+      border-radius:var(--r-2xl); overflow:hidden;
+    }
+    .v2-stage__map { position:absolute; inset:0; display:grid; place-items:center; pointer-events:none; }
+    .v2-stage__map img { width:100%; height:100%; object-fit:contain; mix-blend-mode:multiply; opacity:0.7; }
+    .v2-stage::before {
+      content:""; position:absolute; inset:0;
+      background-image:radial-gradient(circle, var(--c-line) 1.4px, transparent 1.7px);
+      background-size:13px 13px;
+      mask-image:radial-gradient(ellipse 70% 80% at 50% 50%, #000 50%, transparent 90%);
+      -webkit-mask-image:radial-gradient(ellipse 70% 80% at 50% 50%, #000 50%, transparent 90%);
+    }
+    .v2-stage__overlay { position:absolute; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none; }
+    .v2-form {
+      position:absolute; top:32px; left:32px;
+      width:min(360px, calc(100% - 64px));
+      background:rgba(255,255,255,0.78);
+      backdrop-filter:blur(16px) saturate(180%);
+      -webkit-backdrop-filter:blur(16px) saturate(180%);
+      border:1px solid rgba(255,255,255,0.8);
+      border-radius:var(--r-xl); padding:24px;
+      box-shadow:var(--shadow-lift);
+    }
+    .v2-form h3 { font-size:1.25rem; letter-spacing:-0.02em; margin-bottom:16px; }
+    .v2-form .field {
+      display:flex; align-items:center; gap:10px;
+      padding:12px 14px; background:#fff;
+      border:1.5px solid var(--c-brand-200); border-radius:var(--r-pill); margin-bottom:10px;
+    }
+    .v2-form .field input { flex:1; font-size:14px; }
+    .v2-form .dot { width:10px; height:10px; flex-shrink:0; background:var(--c-fg); border-radius:50%; }
+    .v2-form .dot--pink { background:var(--c-brand-500); }
+    .v2-form .btn { width:100%; margin-top:6px; }
+    .v2-city {
+      position:absolute; transform:translate(-50%, -50%);
+      font-family:var(--font-mono); font-size:10.5px; font-weight:600;
+      letter-spacing:0.08em; color:var(--c-fg); pointer-events:none;
+    }
+    .v2-city::before {
+      content:""; position:absolute; left:50%; top:-6px;
+      width:6px; height:6px; border-radius:50%; background:var(--c-brand-500);
+      transform:translateX(-50%);
+      box-shadow:0 0 12px var(--c-brand-500);
+      animation:v2-pulse 2s ease-out infinite;
+    }
+    @keyframes v2-pulse {
+      0% { box-shadow:0 0 0 0 rgba(216,27,93,0.6); }
+      100% { box-shadow:0 0 0 14px rgba(216,27,93,0); }
+    }
+    .v2-route {
+      fill:none; stroke:var(--c-brand-500); stroke-width:1.5;
+      stroke-dasharray:5 6; stroke-linecap:round;
+      animation:v2-flow 1.4s linear infinite;
+    }
+    @keyframes v2-flow { from { stroke-dashoffset:0; } to { stroke-dashoffset:-11; } }
+    .v2-route-end { fill:#fff; stroke:var(--c-brand-500); stroke-width:2; }
+    .v2-truck-dot { fill:var(--c-brand-500); filter:drop-shadow(0 2px 6px rgba(216,27,93,0.5)); }
+    .v2-livechip {
+      position:absolute; bottom:24px; right:24px;
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 14px; background:rgba(10,10,18,0.85);
+      backdrop-filter:blur(10px); border-radius:var(--r-pill);
+      color:#fff; font-family:var(--font-mono); font-size:11.5px; letter-spacing:0.08em;
+    }
+    .v2-livechip::before {
+      content:""; width:6px; height:6px; border-radius:50%; background:var(--c-success);
+      animation:v1-pulse 1.6s ease-out infinite;
+    }
+
+    /* ============= V3 — TERMINAL ============= */
+    .v3-terminal {
+      background:#0A0A12; border:1px solid #1a1b27;
+      border-radius:var(--r-xl); overflow:hidden; box-shadow:var(--shadow-lift);
+    }
+    .v3-terminal__bar {
+      display:flex; align-items:center; gap:8px;
+      padding:12px 16px; background:#11121C; border-bottom:1px solid #1a1b27;
+    }
+    .v3-dot { width:11px; height:11px; border-radius:50%; }
+    .v3-dot--r { background:#FF5F57; } .v3-dot--y { background:#FEBC2E; } .v3-dot--g { background:#28C840; }
+    .v3-terminal__tabs { display:flex; background:#0E0E18; border-bottom:1px solid #1a1b27; }
+    .v3-tab {
+      padding:10px 16px; font-family:var(--font-mono); font-size:11.5px;
+      color:rgba(255,255,255,0.5); border-right:1px solid #1a1b27;
+      transition:background 140ms, color 140ms; cursor:pointer;
+    }
+    .v3-tab.is-active {
+      color:#fff; background:#0A0A12;
+      border-bottom:2px solid var(--c-brand-500);
+    }
+    .v3-terminal__body {
+      padding:24px; font-family:var(--font-mono);
+      font-size:13px; line-height:1.7; color:#D6D8E1; min-height:280px;
+    }
+    .v3-terminal__body .k { color:#FF8FB6; }
+    .v3-terminal__body .s { color:#A5E3B2; }
+    .v3-terminal__body .c { color:#6E6E84; }
+    .v3-terminal__body .u { color:#82AAFF; }
+    .v3-terminal__body .num { color:#FBA94B; }
+    .v3-cursor {
+      display:inline-block; width:7px; height:14px;
+      background:var(--c-brand-300); vertical-align:-2px; margin-left:2px;
+      animation:v3-blink 1s steps(1) infinite;
+    }
+    @keyframes v3-blink { 50% { opacity:0; } }
+    .v3-terminal__footer {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:14px 20px; background:#11121C; border-top:1px solid #1a1b27;
+      font-family:var(--font-mono); font-size:11.5px; color:rgba(255,255,255,0.55);
+    }
+    .v3-run {
+      display:inline-flex; align-items:center; gap:6px;
+      padding:6px 14px; background:var(--c-brand-500); color:#fff;
+      border-radius:var(--r-pill); font-size:11px; font-weight:600;
+      letter-spacing:0.08em; text-transform:uppercase;
+    }
+
+    /* ============= V4 — VEHICLE GALLERY ============= */
+    .v4-head { text-align:center; max-width:720px; margin:0 auto 48px; }
+    .v4-head h2 { font-size:clamp(2rem, 4vw, 3.25rem); margin-block:16px 18px; }
+    .v4-head .sub { font-size:1.0625rem; color:var(--c-fg-mute); }
+    .v4-grid { display:grid; gap:18px; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); }
+    .v4-card {
+      position:relative; padding:28px 24px;
+      background:var(--c-bg); border:1.5px solid var(--c-line);
+      border-radius:var(--r-xl); text-align:center; cursor:pointer;
+      transition:transform 260ms var(--ease-out), border-color 260ms var(--ease-out), box-shadow 260ms var(--ease-out);
+      overflow:hidden;
+    }
+    .v4-card::before {
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(135deg, rgba(216,27,93,0.05) 0%, rgba(216,27,93,0.0) 60%);
+      opacity:0; transition:opacity 260ms;
+    }
+    .v4-card:hover { transform:translateY(-6px); border-color:var(--c-brand-500); box-shadow:0 16px 40px rgba(216,27,93,0.15); }
+    .v4-card:hover::before { opacity:1; }
+    .v4-card__viz { height:120px; display:grid; place-items:center; margin-bottom:18px; position:relative; }
+    .v4-card__viz svg { max-height:120px; width:auto; }
+    .v4-card__name {
+      font-family:var(--font-display); font-weight:700;
+      font-size:1.25rem; letter-spacing:-0.02em; color:var(--c-fg);
+    }
+    .v4-card__cap {
+      margin-top:4px; font-family:var(--font-mono);
+      font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--c-fg-dim);
+    }
+    .v4-card__rate {
+      margin-top:18px; padding-top:16px; border-top:1px solid var(--c-line-soft);
+      font-size:13px; color:var(--c-fg-mute);
+    }
+    .v4-card__rate strong { color:var(--c-brand-500); font-weight:700; font-size:16px; }
+
+    /* ============= V5 — CHAT ============= */
+    .v5-stage {
+      max-width:600px; margin:0 auto;
+      background:var(--c-bg); border:1px solid var(--c-line);
+      border-radius:var(--r-xl); box-shadow:var(--shadow-lift); overflow:hidden;
+    }
+    .v5-stage__head {
+      display:flex; align-items:center; gap:12px;
+      padding:18px 24px; background:var(--c-bg-soft); border-bottom:1px solid var(--c-line);
+    }
+    .v5-stage__avatar {
+      width:36px; height:36px; border-radius:50%;
+      background:linear-gradient(135deg, var(--c-brand-300), var(--c-brand-500));
+      display:grid; place-items:center;
+      color:#fff; font-weight:700; font-family:var(--font-display); font-size:14px;
+    }
+    .v5-stage__name { font-weight:600; font-size:14px; }
+    .v5-stage__status {
+      font-family:var(--font-mono); font-size:11px; color:var(--c-success);
+      display:flex; align-items:center; gap:4px;
+    }
+    .v5-stage__status::before { content:""; width:6px; height:6px; border-radius:50%; background:currentColor; }
+    .v5-body {
+      padding:28px 24px; min-height:380px;
+      display:flex; flex-direction:column; gap:14px;
+      background:
+        radial-gradient(circle, var(--c-line) 1.2px, transparent 1.4px) 0 0 / 18px 18px,
+        var(--c-bg-tint);
+    }
+    .v5-msg {
+      max-width:80%; padding:12px 16px; font-size:14px; line-height:1.55;
+      border-radius:var(--r-lg);
+      animation:v5-popin 500ms var(--ease-out) backwards;
+    }
+    @keyframes v5-popin {
+      from { opacity:0; transform:translateY(8px) scale(0.96); }
+      to   { opacity:1; transform:none; }
+    }
+    .v5-msg--bot  { background:#fff; border:1px solid var(--c-line); color:var(--c-fg); align-self:flex-start; border-bottom-left-radius:6px; }
+    .v5-msg--user { background:var(--c-brand-500); color:#fff; align-self:flex-end; border-bottom-right-radius:6px; }
+    .v5-msg strong { font-weight:700; }
+    .v5-msg .pink { color:var(--c-brand-500); font-weight:700; }
+    .v5-msg__cta {
+      display:inline-flex; align-items:center; gap:6px;
+      padding:8px 14px; margin-top:8px;
+      background:var(--c-brand-500); color:#fff;
+      border-radius:var(--r-pill); font-size:13px; font-weight:600;
+    }
+    .v5-typing {
+      align-self:flex-start; background:#fff; border:1px solid var(--c-line);
+      padding:14px 18px; border-radius:var(--r-lg); border-bottom-left-radius:6px;
+      display:flex; gap:4px;
+    }
+    .v5-typing span {
+      width:6px; height:6px; border-radius:50%; background:var(--c-fg-faint);
+      animation:v5-bounce 1.4s infinite ease-in-out;
+    }
+    .v5-typing span:nth-child(2) { animation-delay:0.2s; }
+    .v5-typing span:nth-child(3) { animation-delay:0.4s; }
+    @keyframes v5-bounce {
+      0%, 60%, 100% { transform:translateY(0); opacity:0.4; }
+      30% { transform:translateY(-4px); opacity:1; }
+    }
+    .v5-input {
+      display:flex; align-items:center; gap:8px;
+      padding:14px 18px; background:#fff; border-top:1px solid var(--c-line);
+    }
+    .v5-input input { flex:1; font-size:14px; }
+    .v5-input button {
+      width:36px; height:36px; border-radius:50%;
+      background:var(--c-brand-500); color:#fff;
+      display:grid; place-items:center;
+    }
+
+    /* ============= V6 — SINGLE SEARCH ============= */
+    .v6-stage { max-width:880px; margin:0 auto; text-align:center; }
+    .v6-stage h2 {
+      font-size:clamp(2.25rem, 5vw, 4rem);
+      margin-block:16px 14px; letter-spacing:-0.03em;
+    }
+    .v6-stage .sub { font-size:1.125rem; color:var(--c-fg-mute); margin-bottom:32px; }
+    .v6-bar {
+      display:grid; grid-template-columns:1fr auto 1fr auto; gap:0; align-items:center;
+      background:#fff; border:1.5px solid var(--c-line);
+      border-radius:var(--r-pill); padding:8px;
+      box-shadow:var(--shadow-card); max-width:760px; margin:0 auto;
+      transition:border-color 200ms, box-shadow 200ms;
+    }
+    .v6-bar:focus-within { border-color:var(--c-brand-500); box-shadow:0 0 0 6px rgba(216,27,93,0.12), var(--shadow-card); }
+    .v6-bar__field { display:flex; align-items:center; gap:12px; padding:14px 18px; }
+    .v6-bar__field input { width:100%; font-size:15px; }
+    .v6-bar__icon { width:18px; height:18px; color:var(--c-fg-dim); flex-shrink:0; }
+    .v6-bar__arrow { color:var(--c-brand-500); padding:0 8px; }
+    .v6-bar .btn { padding:12px 22px; }
+    .v6-chips { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:24px; }
+    .v6-chip {
+      padding:8px 14px; background:#fff;
+      border:1px solid var(--c-line); border-radius:var(--r-pill);
+      font-size:13px; cursor:pointer;
+      transition:border-color 140ms, transform 140ms;
+    }
+    .v6-chip:hover { border-color:var(--c-brand-500); transform:translateY(-1px); }
+    .v6-chip__lane { font-weight:600; color:var(--c-fg); }
+    .v6-chip__price { color:var(--c-brand-500); font-family:var(--font-mono); margin-left:6px; }
+
+    /* ============= V7 — BOOK / API TOGGLE ============= */
+    .v7-stage { max-width:920px; margin:0 auto; }
+    .v7-tabs {
+      display:flex; gap:6px; padding:6px;
+      background:var(--c-bg-soft); border:1px solid var(--c-line);
+      border-radius:var(--r-pill); max-width:max-content; margin:0 auto 28px;
+    }
+    .v7-tab {
+      display:inline-flex; align-items:center; gap:8px;
+      padding:12px 22px; font-size:14px; font-weight:600;
+      border-radius:var(--r-pill); color:var(--c-fg-mute);
+      transition:background 200ms, color 200ms; cursor:pointer;
+    }
+    .v7-tab.is-active { background:#fff; color:var(--c-fg); box-shadow:0 1px 2px rgba(10,10,20,0.06); }
+    .v7-tab.is-active.v7-tab--api { color:var(--c-brand-500); }
+    .v7-panel { display:none; animation:v7-fade 400ms var(--ease-out); }
+    .v7-panel.is-active { display:block; }
+    @keyframes v7-fade { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+    .v7-book {
+      display:grid; gap:16px;
+      background:#fff; border:1px solid var(--c-line);
+      border-radius:var(--r-xl); padding:32px;
+      max-width:560px; margin:0 auto;
+    }
+    .v7-book__field {
+      display:flex; align-items:center; gap:12px;
+      padding:14px 18px;
+      border:1.5px solid var(--c-brand-200); border-radius:var(--r-pill);
+    }
+    .v7-book__dot { width:12px; height:12px; background:var(--c-fg); }
+    .v7-book__dot--circle { border-radius:50%; background:var(--c-brand-500); }
+    .v7-book__field input { flex:1; font-size:15px; }
+    .v7-api { display:grid; gap:24px; grid-template-columns:1fr; }
+    @media (min-width: 880px) { .v7-api { grid-template-columns:1.4fr 1fr; gap:32px; } }
+    .v7-api__code {
+      background:#0A0A12; color:#D6D8E1;
+      border-radius:var(--r-xl); padding:24px;
+      font-family:var(--font-mono); font-size:13px; line-height:1.7;
+      overflow:auto;
+    }
+    .v7-api__code .k { color:#FF8FB6; }
+    .v7-api__code .s { color:#A5E3B2; }
+    .v7-api__code .c { color:#6E6E84; }
+    .v7-api__code .num { color:#FBA94B; }
+    .v7-api__code .u { color:#82AAFF; }
+    .v7-api__side { display:flex; flex-direction:column; gap:18px; }
+    .v7-api__feature {
+      display:flex; align-items:flex-start; gap:14px;
+      padding:18px; background:var(--c-bg-soft); border-radius:var(--r-lg);
+    }
+    .v7-api__feature-icon {
+      width:36px; height:36px; flex-shrink:0;
+      border-radius:var(--r-md);
+      background:rgba(216,27,93,0.12); color:var(--c-brand-500);
+      display:grid; place-items:center;
+    }
+    .v7-api__feature-icon svg { width:18px; height:18px; }
+    .v7-api__feature h4 { font-family:var(--font-display); font-weight:600; font-size:14.5px; margin-bottom:2px; }
+    .v7-api__feature p { font-size:12.5px; line-height:1.5; }
+
+    /* ============= V8 — PRICE COUNTER ============= */
+    .v8-stage { text-align:center; max-width:880px; margin:0 auto; position:relative; }
+    .v8-stage h1 {
+      font-size:clamp(2.5rem, 6vw, 5rem);
+      letter-spacing:-0.04em; line-height:1.04;
+      margin-block:16px 32px;
+    }
+    .v8-price {
+      display:inline-flex; align-items:baseline;
+      color:var(--c-brand-500); font-weight:700; position:relative;
+    }
+    .v8-price__cur { font-size:0.7em; margin-right:6px; color:var(--c-brand-500); }
+    .v8-price__num {
+      font-variant-numeric:tabular-nums;
+      min-width:5ch; text-align:left;
+      display:inline-block;
+      transition:opacity 220ms;
+    }
+    .v8-stage .sub { font-size:1.125rem; color:var(--c-fg-mute); max-width:48ch; margin:0 auto 36px; }
+    .v8-quick {
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px; background:#fff;
+      border:1.5px solid var(--c-brand-200); border-radius:var(--r-pill);
+      box-shadow:var(--shadow-card); max-width:560px; width:100%;
+    }
+    .v8-quick input { flex:1; padding:10px 14px; font-size:14px; }
+    .v8-quick .btn { padding:12px 20px; }
+    .v8-footer {
+      margin-top:36px;
+      font-family:var(--font-mono); font-size:12px;
+      letter-spacing:0.08em; text-transform:uppercase;
+      color:var(--c-fg-dim);
+      display:flex; align-items:center; justify-content:center; gap:8px;
+    }
+    .v8-footer::before {
+      content:""; width:6px; height:6px; border-radius:50%;
+      background:var(--c-success); animation:v1-pulse 1.6s ease-out infinite;
+    }
+
+    /* ============= FOOTER ============= */
+    .vfoot { padding-block:48px; background:var(--c-bg-dark); color:#fff; text-align:center; }
+    .vfoot p { font-family:var(--font-mono); font-size:13px; color:rgba(255,255,255,0.55); }
+    .vfoot a { color:var(--c-brand-300); border-bottom:1px solid currentColor; padding-bottom:1px; }
+  </style>
+</head>
+<body>
+
+  <header class="vnav">
+    <div class="container vnav__inner">
+      <a class="vnav__back" href="index.html">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to main
+      </a>
+      <span class="vnav__title">Hero Variants</span>
+      <nav class="vnav__pills" aria-label="Jump to variant">
+        <a class="vnav__pill" href="#v1">V1</a>
+        <a class="vnav__pill" href="#v2">V2</a>
+        <a class="vnav__pill" href="#v3">V3</a>
+        <a class="vnav__pill" href="#v4">V4</a>
+        <a class="vnav__pill" href="#v5">V5</a>
+        <a class="vnav__pill" href="#v6">V6</a>
+        <a class="vnav__pill" href="#v7">V7</a>
+        <a class="vnav__pill" href="#v8">V8</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="vintro">
+    <div class="container vintro__inner">
+      <span class="eyebrow" style="color:var(--c-brand-300)">For internal review</span>
+      <h1>Eight ways to <span class="pink">land the hero.</span></h1>
+      <p>Each direction below takes the same brief — instant freight pricing, booked online — and explores a different angle: live network energy, big visual map, developer-first API, conversational AI, or just plain speed. Scroll through, pick one, ship it.</p>
+    </div>
+  </section>
+
+  <!-- V1 — LIVE ORDER TICKER -->
+  <section class="variant" id="v1">
+    <div class="container">
+      <header class="variant-head">
+        <span class="variant-num">V1</span>
+        <div>
+          <span class="variant-tag">Live network energy</span>
+          <h2 class="variant-title">Live Order Ticker</h2>
+          <p class="variant-desc">Same hero copy + form on the left. The right side is a real-time order feed: shipments being priced, booked, and delivered live. Each row slides in as it happens, the oldest fades out. Shows that the platform is busy and trustworthy without saying so.</p>
+        </div>
+      </header>
+
+      <div class="hero-base">
+        <div class="hero-copy">
+          <span class="eyebrow">Instacarrier · Live network</span>
+          <h1>A freight quote in <span class="pink">60&nbsp;seconds.</span></h1>
+          <p class="sub">Type a route, get a binding price, watch the booking land in our live order feed. From one-off loads to recurring contracts.</p>
+          <a href="#" class="btn btn--primary btn--lg" style="margin-top:24px">Get your quote
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <aside class="v1-ticker" aria-label="Live shipment feed">
+          <header class="v1-ticker__head">
+            <span class="v1-ticker__title">Live feed</span>
+            <span class="v1-ticker__count" data-v1-count>4 580 today</span>
+          </header>
+          <div class="v1-ticker__list" data-v1-list></div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- V2 — MASSIVE INTERACTIVE MAP -->
+  <section class="variant variant--soft" id="v2">
+    <div class="container">
+      <header class="variant-head">
+        <span class="variant-num">V2</span>
+        <div>
+          <span class="variant-tag">Map-first</span>
+          <h2 class="variant-title">Massive Interactive Map</h2>
+          <p class="variant-desc">The Europe map becomes the centerpiece — full-width, with pulsing city dots in 10 European capitals and 8 simultaneous routes. The booking form floats over it as a glass-morphism widget on the top-left. Shows scale + reach at a glance.</p>
+        </div>
+      </header>
+
+      <div class="v2-stage" aria-label="Europe map with floating quote form">
+        <div class="v2-stage__map" aria-hidden="true">
+          <img src="assets/europe-pixels.svg" alt="" onerror="this.style.display='none'" />
+        </div>
+        <svg class="v2-stage__overlay" viewBox="0 0 1215 967" preserveAspectRatio="xMidYMid meet" aria-hidden="true" data-v2-overlay></svg>
+
+        <span class="v2-city" style="left:31%; top:48%">PAR</span>
+        <span class="v2-city" style="left:51%; top:53%">BTS</span>
+        <span class="v2-city" style="left:36%; top:42%">AMS</span>
+        <span class="v2-city" style="left:48%; top:42%">BER</span>
+        <span class="v2-city" style="left:56%; top:57%">VIE</span>
+        <span class="v2-city" style="left:42%; top:66%">MIL</span>
+        <span class="v2-city" style="left:46%; top:71%">ROM</span>
+        <span class="v2-city" style="left:21%; top:78%">MAD</span>
+        <span class="v2-city" style="left:25%; top:38%">LDN</span>
+        <span class="v2-city" style="left:56%; top:31%">STO</span>
+
+        <div class="v2-form">
+          <h3>Get a binding price</h3>
+          <div class="field"><span class="dot"></span><input type="text" placeholder="Pickup" value="Bratislava, SK" /></div>
+          <div class="field"><span class="dot dot--pink"></span><input type="text" placeholder="Delivery" value="Lyon, FR" /></div>
+          <button class="btn btn--primary">Price &amp; book →</button>
+        </div>
+
+        <div class="v2-livechip"><span data-v2-live>248 trucks moving now</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- V3 — TERMINAL / API-FIRST -->
+  <section class="variant variant--dark" id="v3">
+    <div class="container">
+      <header class="variant-head">
+        <span class="variant-num">V3</span>
+        <div>
+          <span class="variant-tag">Developer-first</span>
+          <h2 class="variant-title">Terminal / API-first</h2>
+          <p class="variant-desc">For the technical buyer: hero shows that Instacarrier is also an API. Left side carries the headline + CTAs, right side is a faux IDE with auto-rotating tabs (request → response → TypeScript client), syntax-highlighted code, blinking cursor, and a "Run" pill. Two doors to the same engine.</p>
+        </div>
+      </header>
+
+      <div class="hero-base">
+        <div class="hero-copy">
+          <span class="eyebrow" style="color:var(--c-brand-300)">Instacarrier · API</span>
+          <h1>Quote, book, track —<br /><span class="pink">all programmatic.</span></h1>
+          <p class="sub">Instacarrier is a REST API. Two endpoints, one auth header, structured JSON in and out. Webhook callbacks for status. EDI for invoicing. Five lines of TypeScript, and your TMS speaks freight.</p>
+          <div style="margin-top:28px; display:flex; gap:12px; flex-wrap:wrap;">
+            <a href="#" class="btn btn--primary btn--lg">Get an API key</a>
+            <a href="#" class="btn btn--ghost btn--lg" style="color:#fff; border-color:rgba(255,255,255,0.3)">Read the docs →</a>
+          </div>
+        </div>
+
+        <div class="v3-terminal">
+          <div class="v3-terminal__bar">
+            <span class="v3-dot v3-dot--r"></span>
+            <span class="v3-dot v3-dot--y"></span>
+            <span class="v3-dot v3-dot--g"></span>
+            <span style="margin-left:12px; font-family:var(--font-mono); font-size:11.5px; color:rgba(255,255,255,0.55)">~/swida-integration</span>
+          </div>
+          <div class="v3-terminal__tabs">
+            <button class="v3-tab is-active" data-v3-tab="req">request.http</button>
+            <button class="v3-tab" data-v3-tab="res">response.json</button>
+            <button class="v3-tab" data-v3-tab="ts">client.ts</button>
+          </div>
+          <pre class="v3-terminal__body" data-v3-pane="req"><span class="k">POST</span> <span class="u">https://api.swida.eu/v1/instacarrier/quotes</span>
+<span class="k">Authorization</span>: Bearer sk_live_•••••••••••••••
+<span class="k">Content-Type</span>: application/json
+
+{
+  <span class="s">"from"</span>: <span class="s">"Bratislava, SK"</span>,
+  <span class="s">"to"</span>:   <span class="s">"Lyon, FR"</span>,
+  <span class="s">"vehicle"</span>: <span class="s">"van_3_5t"</span>,
+  <span class="s">"weight_kg"</span>: <span class="num">1200</span>,
+  <span class="s">"pickup_window"</span>: <span class="s">"2026-05-15T09:00Z"</span>
+}<span class="v3-cursor"></span></pre>
+          <pre class="v3-terminal__body" data-v3-pane="res" hidden>{
+  <span class="s">"quote_id"</span>: <span class="s">"qt_01HG9KP4ZQX2J7Y"</span>,
+  <span class="s">"price"</span>: { <span class="s">"amount"</span>: <span class="num">1240</span>, <span class="s">"currency"</span>: <span class="s">"EUR"</span> },
+  <span class="s">"binding_until"</span>: <span class="s">"2026-05-14T12:30Z"</span>,
+  <span class="s">"pickup_eta_minutes"</span>: <span class="num">118</span>,
+  <span class="s">"vehicle_class"</span>: <span class="s">"van_3_5t"</span>,
+  <span class="s">"book_url"</span>: <span class="s">"https://api.swida.eu/v1/quotes/qt_01HG.../book"</span>
+}</pre>
+          <pre class="v3-terminal__body" data-v3-pane="ts" hidden><span class="c">// 5 lines and you're shipping</span>
+<span class="k">import</span> { Swida } <span class="k">from</span> <span class="s">"@swida/instacarrier"</span>;
+<span class="k">const</span> swida = <span class="k">new</span> Swida(<span class="s">"sk_live_•••••"</span>);
+
+<span class="k">const</span> quote = <span class="k">await</span> swida.quote({
+  from: <span class="s">"Bratislava, SK"</span>, to: <span class="s">"Lyon, FR"</span>,
+  vehicle: <span class="s">"van_3_5t"</span>, weightKg: <span class="num">1200</span>
+});
+<span class="k">await</span> swida.book(quote.id);  <span class="c">// → shipment confirmed</span></pre>
+          <div class="v3-terminal__footer">
+            <span>200 OK · 142&nbsp;ms · €1,240</span>
+            <button class="v3-run">▶ Run</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- V4 — VEHICLE GALLERY -->
+  <section class="variant variant--tint" id="v4">
+    <div class="container">
+      <header class="variant-head">
+        <span class="variant-num">V4</span>
+        <div>
+          <span class="variant-tag">Vehicle-first picker</span>
+          <h2 class="variant-title">Vehicle Gallery Picker</h2>
+          <p class="variant-desc">Start with the vehicle, not the route. Big visual cards for each class — Van / Sprinter / Lorry / LKW — each with a custom SVG illustration, capacity, and price-per-km. Hover lifts the card and tints it. Tactile and confident.</p>
+        </div>
+      </header>
+
+      <div class="v4-head">
+        <span class="eyebrow">Instacarrier · Pick your truck</span>
+        <h2>What are you <span class="pink">shipping today?</span></h2>
+        <p class="sub">Choose the vehicle class that fits the load — we'll handle the rest. Binding prices, pickup in hours.</p>
+      </div>
+
+      <div class="v4-grid">
+        <button class="v4-card">
+          <div class="v4-card__viz">
+            <svg viewBox="0 0 200 110" fill="none">
+              <rect x="40" y="38" width="100" height="44" rx="6" fill="#fff" stroke="#0A0A12" stroke-width="2"/>
+              <path d="M140 50h22l24 16v16h-46V50z" fill="#fff" stroke="#0A0A12" stroke-width="2" stroke-linejoin="round"/>
+              <rect x="146" y="55" width="32" height="12" rx="1" fill="#E5E6ED"/>
+              <circle cx="58" cy="92" r="10" fill="#0A0A12"/><circle cx="58" cy="92" r="3" fill="#fff"/>
+              <circle cx="160" cy="92" r="10" fill="#0A0A12"/><circle cx="160" cy="92" r="3" fill="#fff"/>
+              <circle cx="186" cy="74" r="2.5" fill="#FBA94B"/>
+            </svg>
+          </div>
+          <div class="v4-card__name">Van</div>
+          <div class="v4-card__cap">Up to 1.2 t · 8 m³</div>
+          <div class="v4-card__rate">from <strong>€&nbsp;0.85</strong>/km</div>
+        </button>
+
+        <button class="v4-card">
+          <div class="v4-card__viz">
+            <svg viewBox="0 0 200 110" fill="none">
+              <rect x="30" y="28" width="110" height="56" rx="6" fill="#fff" stroke="#0A0A12" stroke-width="2"/>
+              <path d="M140 38h26l30 22v24h-56V38z" fill="#fff" stroke="#0A0A12" stroke-width="2" stroke-linejoin="round"/>
+              <rect x="148" y="44" width="36" height="16" rx="1" fill="#E5E6ED"/>
+              <circle cx="55" cy="94" r="11" fill="#0A0A12"/><circle cx="55" cy="94" r="3" fill="#fff"/>
+              <circle cx="165" cy="94" r="11" fill="#0A0A12"/><circle cx="165" cy="94" r="3" fill="#fff"/>
+              <path d="M40 56h90" stroke="#D81B5D" stroke-width="2" stroke-dasharray="4 3"/>
+            </svg>
+          </div>
+          <div class="v4-card__name">Sprinter</div>
+          <div class="v4-card__cap">Up to 3.5 t · 17 m³</div>
+          <div class="v4-card__rate">from <strong>€&nbsp;1.10</strong>/km</div>
+        </button>
+
+        <button class="v4-card">
+          <div class="v4-card__viz">
+            <svg viewBox="0 0 200 110" fill="none">
+              <rect x="14" y="22" width="130" height="64" rx="5" fill="#fff" stroke="#0A0A12" stroke-width="2"/>
+              <path d="M144 36h28l32 26v24h-60V36z" fill="#fff" stroke="#0A0A12" stroke-width="2" stroke-linejoin="round"/>
+              <rect x="152" y="44" width="42" height="18" rx="1" fill="#E5E6ED"/>
+              <circle cx="42" cy="96" r="12" fill="#0A0A12"/><circle cx="42" cy="96" r="3" fill="#fff"/>
+              <circle cx="84" cy="96" r="12" fill="#0A0A12"/><circle cx="84" cy="96" r="3" fill="#fff"/>
+              <circle cx="172" cy="96" r="12" fill="#0A0A12"/><circle cx="172" cy="96" r="3" fill="#fff"/>
+            </svg>
+          </div>
+          <div class="v4-card__name">Lorry</div>
+          <div class="v4-card__cap">Up to 12 t · 50 m³</div>
+          <div class="v4-card__rate">from <strong>€&nbsp;1.25</strong>/km</div>
+        </button>
+
+        <button class="v4-card">
+          <div class="v4-card__viz">
+            <svg viewBox="0 0 200 110" fill="none">
+              <rect x="6" y="20" width="140" height="66" rx="4" fill="#fff" stroke="#0A0A12" stroke-width="2"/>
+              <path d="M146 34h30l30 28v24h-60V34z" fill="#fff" stroke="#0A0A12" stroke-width="2" stroke-linejoin="round"/>
+              <rect x="154" y="44" width="44" height="18" rx="1" fill="#E5E6ED"/>
+              <circle cx="36" cy="96" r="12" fill="#0A0A12"/><circle cx="36" cy="96" r="3" fill="#fff"/>
+              <circle cx="68" cy="96" r="12" fill="#0A0A12"/><circle cx="68" cy="96" r="3" fill="#fff"/>
+              <circle cx="100" cy="96" r="12" fill="#0A0A12"/><circle cx="100" cy="96" r="3" fill="#fff"/>
+              <circle cx="174" cy="96" r="12" fill="#0A0A12"/><circle cx="174" cy="96" r="3" fill="#fff"/>
+              <text x="40" y="55" font-family="Inter" font-size="10" fill="#0A0A12" font-weight="600">FTL</text>
+            </svg>
+          </div>
+          <div class="v4-card__name">LKW (FTL)</div>
+          <div class="v4-card__cap">Up to 24 t · 100 m³</div>
+          <div class="v4-card__rate">from <strong>€&nbsp;1.50</strong>/km</div>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- V5 — CONVERSATIONAL AI -->
+  <section class="variant" id="v5">
+    <div class="container">
+      <header class="variant-head">
+        <span class="variant-num">V5</span>
+        <div>
+          <span class="variant-tag">AI-conversational</span>
+          <h2 class="variant-title">Conversational AI</h2>
+          <p class="variant-desc">No form. Type freight needs the way you'd email a coordinator — and Swida's AI parses it, prices it, books it. Hero feels like a chat thread with a sequence of messages and typing indicators animating in. Emphasises the "AI parsing your request" claim concretely.</p>
+        </div>
+      </header>
+
+      <div class="v5-stage" data-v5>
+        <header class="v5-stage__head">
+          <div class="v5-stage__avatar">S</div>
+          <div style="flex:1">
+            <div class="v5-stage__name">Swida AI · Instacarrier</div>
+            <div class="v5-stage__status">Online · Avg reply &lt; 2 s</div>
+          </div>
+          <span style="font-family:var(--font-mono); font-size:11px; color:var(--c-fg-dim)">try it →</span>
+        </header>
+
+        <div class="v5-body" data-v5-body></div>
+
+        <div class="v5-input">
+          <input type="text" placeholder="Describe what you want to ship…" />
+          <button aria-label="Send">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- V6 — SINGLE-FIELD SEARCH -->
+  <section class="variant variant--soft" id="v6">
+    <div class="container">
+      <header class="variant-head">
+        <span class="variant-num">V6</span>
+        <div>
+          <span class="variant-tag">Search-bar minimalism</span>
+          <h2 class="variant-title">Single Search Bar</h2>
+          <p class="variant-desc">Strip the hero to the minimum. One big search bar — "Where from? → Where to?" — with a price CTA on the right. Under it: recently-priced lane chips you can tap to pre-fill. Google-search confidence applied to freight.</p>
+        </div>
+      </header>
+
+      <div class="v6-stage">
+        <span class="eyebrow">Instacarrier</span>
+        <h2>Type a route. <span class="pink">Get a price.</span></h2>
+        <p class="sub">No menus, no forms. One search bar — from where to where — and you have a binding price.</p>
+
+        <div class="v6-bar">
+          <label class="v6-bar__field">
+            <svg class="v6-bar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-7-7.58-7-12a7 7 0 1114 0c0 4.42-7 12-7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            <input type="text" placeholder="Where from?" />
+          </label>
+          <span class="v6-bar__arrow" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </span>
+          <label class="v6-bar__field">
+            <svg class="v6-bar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
+            <input type="text" placeholder="Where to?" />
+          </label>
+          <button class="btn btn--primary">Get price</button>
+        </div>
+
+        <div class="v6-chips">
+          <button class="v6-chip"><span class="v6-chip__lane">Bratislava → Lyon</span><span class="v6-chip__price">€&nbsp;1&nbsp;240</span></button>
+          <button class="v6-chip"><span class="v6-chip__lane">Prague → Hamburg</span><span class="v6-chip__price">€&nbsp;980</span></button>
+          <button class="v6-chip"><span class="v6-chip__lane">Madrid → Berlin</span><span class="v6-chip__price">€&nbsp;1&nbsp;360</span></button>
+          <button class="v6-chip"><span class="v6-chip__lane">Vienna → Milan</span><span class="v6-chip__price">€&nbsp;760</span></button>
+          <button class="v6-chip"><span class="v6-chip__lane">Warsaw → Rotterdam</span><span class="v6-chip__price">€&nbsp;1&nbsp;480</span></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- V7 — BOOK / API TOGGLE -->
+  <section class="variant" id="v7">
+    <div class="container">
+      <header class="variant-head">
+        <span class="variant-num">V7</span>
+        <div>
+          <span class="variant-tag">Two-audience switcher</span>
+          <h2 class="variant-title">Book vs Integrate Toggle</h2>
+          <p class="variant-desc">One hero, two doors. A clean pill toggle at the top — "Book a truck" or "Integrate via API" — switches the entire content panel below. SMBs get the form. Engineers get the curl snippet + "Get API key" CTA + integration feature highlights. No compromise.</p>
+        </div>
+      </header>
+
+      <div class="v7-stage">
+        <div class="v7-tabs" role="tablist">
+          <button class="v7-tab is-active" data-v7-tab="book" role="tab">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="14" height="11" rx="1"/><path d="M15 9h4l3 4v4h-7"/><circle cx="5.5" cy="18.5" r="1.7"/><circle cx="18.5" cy="18.5" r="1.7"/></svg>
+            Book a truck
+          </button>
+          <button class="v7-tab v7-tab--api" data-v7-tab="api" role="tab">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            Integrate via API
+          </button>
+        </div>
+
+        <div class="v7-panel is-active" data-v7-panel="book">
+          <h1 style="font-size:clamp(2rem,4vw,2.75rem); text-align:center; max-width:20ch; margin:0 auto 28px">
+            A binding price in <span class="pink">60 seconds.</span>
+          </h1>
+          <form class="v7-book" onsubmit="event.preventDefault();">
+            <div class="v7-book__field"><span class="v7-book__dot"></span><input type="text" placeholder="Pickup location" /></div>
+            <div class="v7-book__field"><span class="v7-book__dot v7-book__dot--circle"></span><input type="text" placeholder="Delivery location" /></div>
+            <div class="v7-book__field"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 6 10-6"/></svg><input type="email" placeholder="Your email" /></div>
+            <button class="btn btn--primary btn--lg" type="submit">Get your quote →</button>
+          </form>
+        </div>
+
+        <div class="v7-panel" data-v7-panel="api">
+          <h1 style="font-size:clamp(2rem,4vw,2.75rem); text-align:center; max-width:20ch; margin:0 auto 28px">
+            Five lines of code, <span class="pink">freight in production.</span>
+          </h1>
+          <div class="v7-api">
+            <pre class="v7-api__code"><span class="c">// quote → book → callback. Done.</span>
+<span class="k">import</span> { Swida } <span class="k">from</span> <span class="s">"@swida/instacarrier"</span>;
+
+<span class="k">const</span> swida = <span class="k">new</span> Swida(process.env.SWIDA_KEY);
+
+<span class="k">const</span> quote = <span class="k">await</span> swida.quote({
+  from: <span class="s">"Bratislava, SK"</span>,
+  to:   <span class="s">"Lyon, FR"</span>,
+  vehicle: <span class="s">"van_3_5t"</span>,
+  weightKg: <span class="num">1200</span>
+});
+
+<span class="k">await</span> swida.book(quote.id);
+<span class="c">// → status callbacks land on your webhook every 2-4 h</span></pre>
+            <div class="v7-api__side">
+              <div class="v7-api__feature">
+                <div class="v7-api__feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+                <div><h4>Live status webhooks</h4><p>Position updates every 2–4 h, delivery confirmations.</p></div>
+              </div>
+              <div class="v7-api__feature">
+                <div class="v7-api__feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 10h18M7 14h4"/></svg></div>
+                <div><h4>EDI invoicing</h4><p>EDIFACT INVOIC out the moment delivery is confirmed.</p></div>
+              </div>
+              <div class="v7-api__feature">
+                <div class="v7-api__feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></div>
+                <div><h4>Sandbox &amp; staging</h4><p>Test keys, mock fleet, deterministic responses for CI.</p></div>
+              </div>
+              <a href="#" class="btn btn--primary" style="justify-content:center">Get an API key</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- V8 — ANIMATED PRICE COUNTER -->
+  <section class="variant variant--soft" id="v8">
+    <div class="container">
+      <header class="variant-head">
+        <span class="variant-num">V8</span>
+        <div>
+          <span class="variant-tag">Speed-headline</span>
+          <h2 class="variant-title">Animated Price Counter</h2>
+          <p class="variant-desc">If "60 seconds" is the killer claim, lead with it visually. A massive headline with the price animating like a slot machine through realistic lane prices. Tiny quick-route input below. Footer ticker shows how many prices were generated this hour. The whole hero is one promise.</p>
+        </div>
+      </header>
+
+      <div class="v8-stage">
+        <span class="eyebrow">Instacarrier · 24/7 pricing</span>
+        <h1>From request to <span class="v8-price"><span class="v8-price__cur">€</span><span class="v8-price__num" data-v8-num>1 240</span></span><br />in under <span class="pink">60 seconds.</span></h1>
+        <p class="sub">No back-and-forth, no quote chasing. Type a route, the engine prices it from historical lane data + live market signal, and a binding number lands in your inbox before the page reloads.</p>
+
+        <form class="v8-quick" onsubmit="event.preventDefault();">
+          <input type="text" placeholder="From" />
+          <span style="color:var(--c-brand-500); font-size:18px;">→</span>
+          <input type="text" placeholder="To" />
+          <button class="btn btn--primary">Price it</button>
+        </form>
+
+        <div class="v8-footer">
+          <span data-v8-counter>23 prices generated this hour</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="vfoot">
+    <p>© 2026 Swida Innovative · <a href="index.html">← Back to main hero</a></p>
+  </footer>
+
+  <script>
+    (function () {
+      "use strict";
+      var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var SVG_NS = "http://www.w3.org/2000/svg";
+
+      /* V1 — LIVE TICKER */
+      (function () {
+        var list = document.querySelector("[data-v1-list]");
+        var counter = document.querySelector("[data-v1-count]");
+        if (!list) return;
+        var lanes = [
+          ["Bratislava → Lyon",       "Van 3.5t",     "1 240", "booked"],
+          ["Hamburg → Madrid",        "LKW 24t",      "2 180", "transit"],
+          ["Vienna → Milan",          "Sprinter",     "760",   "delivered"],
+          ["Prague → Amsterdam",      "Big Lorry",    "1 840", "booked"],
+          ["Warsaw → Rotterdam",      "Van 3.5t",     "1 480", "transit"],
+          ["Madrid → Berlin",         "LKW 24t",      "1 360", "booked"],
+          ["Budapest → Cologne",      "Sprinter",     "920",   "transit"],
+          ["Bucharest → Munich",      "Big Lorry",    "1 580", "delivered"],
+          ["Sofia → Paris",           "LKW 24t",      "2 040", "transit"],
+          ["Krakow → Hamburg",        "Sprinter",     "880",   "booked"],
+          ["Lisbon → Frankfurt",      "Big Lorry",    "1 760", "transit"],
+          ["Athens → Vienna",         "Van 3.5t",     "1 320", "booked"]
+        ];
+        function statusLabel(s) {
+          if (s === "booked")    return ["• Booked",    "v1-row__status--booked"];
+          if (s === "transit")   return ["▸ In transit","v1-row__status--transit"];
+          if (s === "delivered") return ["✓ Delivered", "v1-row__status--delivered"];
+          return ["", ""];
+        }
+        function fmtTime(d) {
+          return String(d.getHours()).padStart(2, "0") + ":" + String(d.getMinutes()).padStart(2, "0");
+        }
+        function addRow(lane) {
+          var lbl = statusLabel(lane[3]);
+          var row = document.createElement("div");
+          row.className = "v1-row";
+          row.style.gridTemplateColumns = "44px 1fr auto 70px auto";
+          row.innerHTML =
+            '<span class="v1-row__time">' + fmtTime(new Date()) + '</span>' +
+            '<span class="v1-row__lane">' + lane[0].replace("→", '<span class="arrow">→</span>') + '</span>' +
+            '<span class="v1-row__vehicle">' + lane[1] + '</span>' +
+            '<span class="v1-row__price">€&nbsp;' + lane[2] + '</span>' +
+            '<span class="v1-row__status ' + lbl[1] + '">' + lbl[0] + '</span>';
+          list.insertBefore(row, list.firstChild);
+          while (list.children.length > 7) list.removeChild(list.lastChild);
+        }
+        for (var i = 0; i < 7; i++) addRow(lanes[Math.floor(Math.random() * lanes.length)]);
+        if (!reduced) {
+          setInterval(function () {
+            addRow(lanes[Math.floor(Math.random() * lanes.length)]);
+            if (counter) {
+              var n = parseInt(counter.textContent.replace(/\D/g, ""), 10) + 1;
+              counter.textContent = n.toLocaleString("en-GB") + " today";
+            }
+          }, 2400);
+        }
+      })();
+
+      /* V2 — MULTI-ROUTE MAP */
+      (function () {
+        var overlay = document.querySelector("[data-v2-overlay]");
+        var live    = document.querySelector("[data-v2-live]");
+        if (!overlay) return;
+        var CITIES = {
+          par:{x:380,y:465}, bts:{x:622,y:510}, ams:{x:445,y:410},
+          ber:{x:583,y:405}, vie:{x:678,y:553}, mil:{x:512,y:638},
+          rom:{x:560,y:686}, mad:{x:255,y:755}, ldn:{x:307,y:368},
+          sto:{x:680,y:300}, prg:{x:592,y:474}, ham:{x:543,y:392}
+        };
+        var keys = Object.keys(CITIES);
+        var SLOTS = 8;
+        var active = new Set();
+        var live_n = 248;
+
+        function pick() {
+          while (true) {
+            var a = keys[Math.floor(Math.random() * keys.length)];
+            var b = keys[Math.floor(Math.random() * keys.length)];
+            if (a === b) continue;
+            var id = a + "-" + b;
+            if (!active.has(id)) return { id: id, from: CITIES[a], to: CITIES[b] };
+          }
+        }
+        function bezier(p1, p2) {
+          var dx = p2.x - p1.x, dy = p2.y - p1.y;
+          var len = Math.hypot(dx, dy) || 1;
+          var ux = -dy / len, uy = dx / len;
+          var lift = Math.min(200, len * 0.32);
+          return "M " + p1.x + " " + p1.y +
+                 " C " + (p1.x + dx*0.33 + ux*lift).toFixed(0) + " " + (p1.y + dy*0.33 + uy*lift).toFixed(0) +
+                 " "   + (p1.x + dx*0.66 + ux*lift).toFixed(0) + " " + (p1.y + dy*0.66 + uy*lift).toFixed(0) +
+                 " "   + p2.x + " " + p2.y;
+        }
+        function el(t, a) { var n = document.createElementNS(SVG_NS, t); for (var k in a) n.setAttribute(k, a[k]); return n; }
+        function spawn() {
+          var r = pick();
+          active.add(r.id);
+          var d = bezier(r.from, r.to);
+          var g = el("g", { opacity: "0" });
+          var path = el("path", { d: d, class: "v2-route" });
+          g.appendChild(path);
+          overlay.appendChild(g);
+          var L = path.getTotalLength ? path.getTotalLength() : 800;
+          path.setAttribute("stroke-dasharray", L);
+          path.setAttribute("stroke-dashoffset", L);
+          g.appendChild(el("circle", { cx: r.from.x, cy: r.from.y, r: 4, class: "v2-route-end" }));
+          g.appendChild(el("circle", { cx: r.to.x,   cy: r.to.y,   r: 4, class: "v2-route-end" }));
+          var truck = el("circle", { r: 4, class: "v2-truck-dot", cx: r.from.x, cy: r.from.y });
+          var motion = el("animateMotion", { dur: "3.6s", begin: "1s", fill: "freeze", path: d });
+          truck.appendChild(motion);
+          g.appendChild(truck);
+          g.getBoundingClientRect();
+          g.style.transition = "opacity 400ms";
+          g.style.opacity = "1";
+          path.style.transition = "stroke-dashoffset 1100ms cubic-bezier(0.16,1,0.3,1)";
+          path.style.strokeDashoffset = "0";
+          setTimeout(function () {
+            g.style.opacity = "0";
+            setTimeout(function () {
+              g.remove(); active.delete(r.id); spawn();
+            }, 500);
+          }, 5400);
+        }
+        if (!reduced) {
+          for (var i = 0; i < SLOTS; i++) setTimeout(spawn, i * 700);
+          setInterval(function () {
+            live_n += Math.floor(Math.random() * 5) - 2;
+            if (live) live.textContent = live_n + " trucks moving now";
+          }, 3000);
+        } else {
+          for (var j = 0; j < 4; j++) spawn();
+        }
+      })();
+
+      /* V3 — TERMINAL TAB ROTATE */
+      (function () {
+        var tabs = document.querySelectorAll("[data-v3-tab]");
+        var panes = document.querySelectorAll("[data-v3-pane]");
+        if (!tabs.length) return;
+        tabs.forEach(function (t) {
+          t.addEventListener("click", function () {
+            var which = t.dataset.v3Tab;
+            tabs.forEach(function (x) { x.classList.toggle("is-active", x === t); });
+            panes.forEach(function (p) { p.hidden = p.dataset.v3Pane !== which; });
+          });
+        });
+        if (!reduced) {
+          var order = ["req", "res", "ts"];
+          var i = 0;
+          setInterval(function () {
+            i = (i + 1) % order.length;
+            var which = order[i];
+            tabs.forEach(function (x) { x.classList.toggle("is-active", x.dataset.v3Tab === which); });
+            panes.forEach(function (p) { p.hidden = p.dataset.v3Pane !== which; });
+          }, 5200);
+        }
+      })();
+
+      /* V5 — CHAT MESSAGE SEQUENCE */
+      (function () {
+        var body = document.querySelector("[data-v5-body]");
+        if (!body) return;
+        var sequence = [
+          { delay:  400, kind: "bot",    text: "Hi 👋 What do you need to ship?" },
+          { delay: 1500, kind: "typing" },
+          { delay: 2400, kind: "user",   text: "Need a van from Bratislava to Lyon tomorrow morning, about 1.2 tons" },
+          { delay: 3400, kind: "typing" },
+          { delay: 4600, kind: "bot",    text: "Got it — parsed:<br />🚚 <strong>Van 3.5 t</strong> · BTS → LYS · 1.2 t · pickup tomorrow 09:00" },
+          { delay: 5400, kind: "typing" },
+          { delay: 6300, kind: "bot",    text: "Best binding price: <span class=\"pink\">€&nbsp;1&nbsp;240</span><br />Pickup confirmed in 2 h. Want me to book it?", cta: true }
+        ];
+        function add(item) {
+          var el;
+          if (item.kind === "typing") {
+            el = document.createElement("div");
+            el.className = "v5-typing";
+            el.innerHTML = "<span></span><span></span><span></span>";
+            setTimeout(function () { if (el.parentNode) el.remove(); }, 1400);
+          } else {
+            el = document.createElement("div");
+            el.className = "v5-msg v5-msg--" + item.kind;
+            el.innerHTML = item.text;
+            if (item.cta) el.innerHTML += '<br /><a class="v5-msg__cta" href="#">Book it →</a>';
+          }
+          body.appendChild(el);
+          body.scrollTop = body.scrollHeight;
+        }
+        function play() {
+          body.innerHTML = "";
+          sequence.forEach(function (item) { setTimeout(function () { add(item); }, item.delay); });
+        }
+        if ("IntersectionObserver" in window && !reduced) {
+          var played = false;
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting && !played) {
+                played = true;
+                play();
+                setInterval(play, 14000);
+              }
+            });
+          }, { threshold: 0.4 });
+          io.observe(body);
+        } else {
+          sequence.filter(function (s) { return s.kind !== "typing"; }).forEach(add);
+        }
+      })();
+
+      /* V7 — BOOK/API TOGGLE */
+      (function () {
+        var tabs = document.querySelectorAll("[data-v7-tab]");
+        var panels = document.querySelectorAll("[data-v7-panel]");
+        if (!tabs.length) return;
+        tabs.forEach(function (t) {
+          t.addEventListener("click", function () {
+            var which = t.dataset.v7Tab;
+            tabs.forEach(function (x) { x.classList.toggle("is-active", x === t); });
+            panels.forEach(function (p) { p.classList.toggle("is-active", p.dataset.v7Panel === which); });
+          });
+        });
+      })();
+
+      /* V8 — PRICE COUNTER */
+      (function () {
+        var num = document.querySelector("[data-v8-num]");
+        var counter = document.querySelector("[data-v8-counter]");
+        if (!num) return;
+        var prices = ["1 240", "980", "760", "1 480", "2 180", "1 360", "1 840", "1 060", "1 320", "880", "1 580", "2 040"];
+        var idx = 0;
+        function next() {
+          idx = (idx + 1) % prices.length;
+          num.style.opacity = "0";
+          setTimeout(function () {
+            num.textContent = prices[idx];
+            num.style.opacity = "1";
+          }, 220);
+        }
+        if (!reduced) setInterval(next, 1800);
+        var hourCount = 23;
+        if (counter && !reduced) {
+          setInterval(function () {
+            hourCount++;
+            counter.textContent = hourCount + " prices generated this hour";
+          }, 4000);
+        }
+      })();
+    })();
+  </script>
+</body>
+</html>

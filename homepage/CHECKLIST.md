@@ -3,6 +3,7 @@
 Working document. Tick items as they ship. New feedback rounds get appended as new sections at the bottom.
 
 - 🟢 Live preview: <https://snqzox.github.io/swida-innovative-web/>
+- 🎨 Hero variants for review (V1–V8): <https://snqzox.github.io/swida-innovative-web/hero-variants.html>
 - 🎨 Figma (v2): <https://www.figma.com/design/QqEp77tv7RAIojH7yg9D5X/Swida---Web?node-id=103-700>
 - 📄 Original Klára Figma (v0): <https://www.figma.com/design/H23Hukc2xjOBPzKrPlKZQZ/Webicek---SWIDA?node-id=0-1>
 - 💬 Client feedback doc: [Google Doc](https://docs.google.com/document/d/1McIOQD_7Y8ebHKU703_O8JkZY3fJb9-2aV65n_LJnrI/)
