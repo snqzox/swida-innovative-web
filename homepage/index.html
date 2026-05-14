@@ -947,6 +947,27 @@
       max-width:48ch; font-size:1.0625rem; line-height:1.6;
     }
     .truck-banner__inner .btn { margin-top:32px; }
+    .truck-banner__stats {
+      display:grid; grid-template-columns:repeat(3, auto); gap:clamp(20px, 4vw, 48px);
+      margin-top:32px; padding-top:28px;
+      border-top:1px solid rgba(255,255,255,0.18);
+      max-width:fit-content;
+    }
+    .truck-banner__stats > [role="listitem"] { display:grid; gap:4px; }
+    .truck-banner__stats strong {
+      font-family:var(--font-display);
+      font-size:clamp(1.625rem, 3vw, 2.25rem);
+      font-weight:700; letter-spacing:-0.02em;
+      color:#fff;
+    }
+    .truck-banner__stats span {
+      font-family:var(--font-mono); font-size:11.5px;
+      letter-spacing:0.08em; text-transform:uppercase;
+      color:rgba(255,255,255,0.65);
+    }
+    @media (max-width: 640px) {
+      .truck-banner__stats { grid-template-columns:1fr; gap:14px; }
+    }
 
     /* ==========================================================================
        CONNECT  ("Stay connected with Swida" — always-dark final section)
@@ -1509,173 +1530,57 @@
       </div>
     </section>
 
-    <!-- ============== TRUCK BANNER (full-bleed photo) ============== -->
-    <section class="truck-banner" aria-label="European freight by Swida">
+    <!-- ============== TRUCK BANNER (full-bleed photo, Round 2: concrete numbers) ============== -->
+    <section class="truck-banner" aria-label="European freight network by Swida">
       <div class="container truck-banner__inner reveal">
-        <span class="eyebrow">European backbone</span>
-        <h2>One network. Every European border.</h2>
-        <p>From the Slovak HQ to the ports of Rotterdam, the docks of Genoa, and the warehouses of Hamburg — Swida's carrier network covers every major European corridor, 24/7.</p>
+        <span class="eyebrow">European reach, in numbers</span>
+        <h2>24/7 dispatch.<br />35 countries.<br />25 000 trucks.</h2>
+        <p>An always-on carrier network across every major European corridor — with a Bratislava dispatch desk that picks up the phone at 03:00 if your truck does.</p>
+        <div class="truck-banner__stats" role="list">
+          <div role="listitem"><strong>24/7</strong><span>Dispatch desk &amp; tracking</span></div>
+          <div role="listitem"><strong>35</strong><span>European countries covered</span></div>
+          <div role="listitem"><strong>25 000+</strong><span>Carriers in the network</span></div>
+        </div>
         <a href="#instacarrier" class="btn btn--primary btn--lg">
-          See live routes
+          Price a shipment now
           <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
       </div>
     </section>
 
-    <!-- ============== TECHNOLOGY ============== -->
-    <section class="section section--soft" id="technology">
-      <div class="container">
-        <header class="feature-head reveal">
-          <span class="eyebrow">Why Swida</span>
-          <h2 style="margin-top:20px">A forwarder built<br />like a <span class="pink">tech company.</span></h2>
-          <p class="lead" style="margin-top:24px">
-            Every shipment that moves through Swida is touched by data, APIs,
-            and AI — so your team gets fewer phone calls, faster answers,
-            and cleaner workflows. Not just "we have a portal." Real
-            automation, end-to-end.
-          </p>
-        </header>
+    <!-- Why Swida (.section--soft #technology) removed Round 2 — the 4 best positioning angles
+         are now folded into the expanded Touchpoints below. -->
 
-        <div class="feature-grid">
-          <article class="feature reveal">
-            <div class="feature__viz feature__viz--brand" aria-hidden="true">
-              <svg viewBox="0 0 64 64" fill="none">
-                <rect x="6" y="22" width="38" height="26" rx="3" fill="#fff" stroke="#D81B5D" stroke-width="2"/>
-                <path d="M44 30h8l8 8v10h-16" fill="#fff" stroke="#D81B5D" stroke-width="2" stroke-linejoin="round"/>
-                <circle cx="18" cy="50" r="4" fill="#D81B5D"/>
-                <circle cx="50" cy="50" r="4" fill="#D81B5D"/>
-                <rect x="12" y="28" width="14" height="8" rx="1" fill="#FFD9E5"/>
-                <path d="M30 14l4 4-4 4M22 18h12" stroke="#D81B5D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <h3>Instant binding prices</h3>
-            <p>Instacarrier prices your shipment in under a minute, with confirmed availability — no quote chasing, no "I'll get back to you tomorrow."</p>
-          </article>
+    <!-- How we operate (.section--dark #how) removed Round 2 — the 5 phases became 6 cards
+         in the Touchpoints section below. -->
 
-          <article class="feature reveal">
-            <div class="feature__viz feature__viz--blue" aria-hidden="true">
-              <svg viewBox="0 0 64 64" fill="none">
-                <circle cx="32" cy="34" r="20" stroke="#5B8DEF" stroke-width="2" fill="#fff"/>
-                <circle cx="32" cy="34" r="6" fill="#5B8DEF"/>
-                <circle cx="32" cy="34" r="3" fill="#fff"/>
-                <path d="M32 14v-6M32 60v-6M52 34h6M6 34h6" stroke="#5B8DEF" stroke-width="2" stroke-linecap="round"/>
-                <path d="M8 14l8 8" stroke="#5B8DEF" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 3"/>
-              </svg>
-            </div>
-            <h3>Tracking every 2–4 hours</h3>
-            <p>Position updates pushed straight into your TMS — or sent as a clean, structured email. Your ops team always knows where the truck is.</p>
-          </article>
-
-          <article class="feature reveal">
-            <div class="feature__viz feature__viz--dark" aria-hidden="true">
-              <svg viewBox="0 0 64 64" fill="none">
-                <rect x="6" y="14" width="22" height="14" rx="2" fill="#1B1B2D" stroke="#D81B5D" stroke-width="1.5"/>
-                <rect x="36" y="14" width="22" height="14" rx="2" fill="#1B1B2D" stroke="#5B8DEF" stroke-width="1.5"/>
-                <rect x="6" y="38" width="22" height="14" rx="2" fill="#1B1B2D" stroke="#5B8DEF" stroke-width="1.5"/>
-                <rect x="36" y="38" width="22" height="14" rx="2" fill="#1B1B2D" stroke="#D81B5D" stroke-width="1.5"/>
-                <path d="M28 21h8M28 45h8M17 28v10M47 28v10" stroke="#52546A" stroke-width="1.5" stroke-dasharray="2 2"/>
-              </svg>
-            </div>
-            <h3>API & EDI on day one</h3>
-            <p>We integrate with your stack — order events, status callbacks, EDI invoicing. One of our enterprise clients hasn't seen a PDF invoice in years.</p>
-          </article>
-
-          <article class="feature reveal">
-            <div class="feature__viz feature__viz--brand" aria-hidden="true">
-              <svg viewBox="0 0 64 64" fill="none">
-                <path d="M12 50V20l10-6 10 6 10-6 10 6v30" fill="#fff" stroke="#D81B5D" stroke-width="2" stroke-linejoin="round"/>
-                <path d="M12 50h40" stroke="#D81B5D" stroke-width="2" stroke-linecap="round"/>
-                <circle cx="22" cy="32" r="2.5" fill="#D81B5D"/>
-                <circle cx="32" cy="28" r="2.5" fill="#D81B5D"/>
-                <circle cx="42" cy="32" r="2.5" fill="#D81B5D"/>
-                <path d="M22 32l10-4 10 4" stroke="#D81B5D" stroke-width="1.5" stroke-dasharray="2 2"/>
-              </svg>
-            </div>
-            <h3>AI-assisted quoting</h3>
-            <p>Every contract we price is shaped by historical data, route economics, and a market-aware model — not a coordinator's gut feeling.</p>
-          </article>
-
-          <article class="feature reveal">
-            <div class="feature__viz feature__viz--blue" aria-hidden="true">
-              <svg viewBox="0 0 64 64" fill="none">
-                <rect x="10" y="12" width="44" height="34" rx="3" fill="#fff" stroke="#5B8DEF" stroke-width="2"/>
-                <path d="M10 22h44" stroke="#5B8DEF" stroke-width="2"/>
-                <circle cx="16" cy="17" r="1.4" fill="#5B8DEF"/><circle cx="20" cy="17" r="1.4" fill="#5B8DEF"/><circle cx="24" cy="17" r="1.4" fill="#5B8DEF"/>
-                <path d="M16 30h20M16 36h28M16 42h12" stroke="#5B8DEF" stroke-width="1.5" stroke-linecap="round"/>
-                <path d="M44 50l4 6 6-10" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <h3>Auto-invoicing</h3>
-            <p>The job closes, the invoice ships — email, PDF, or full EDI. Your AP team stops chasing carriers; ours stops chasing yours.</p>
-          </article>
-
-          <article class="feature reveal">
-            <div class="feature__viz feature__viz--brand" aria-hidden="true">
-              <svg viewBox="0 0 64 64" fill="none">
-                <rect x="8" y="12" width="48" height="34" rx="3" fill="#fff" stroke="#D81B5D" stroke-width="2"/>
-                <rect x="14" y="32" width="6" height="10" fill="#FFD9E5"/>
-                <rect x="24" y="26" width="6" height="16" fill="#FFD9E5"/>
-                <rect x="34" y="22" width="6" height="20" fill="#D81B5D"/>
-                <rect x="44" y="18" width="6" height="24" fill="#FFD9E5"/>
-                <path d="M14 50h40" stroke="#D81B5D" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <h3>Client zone & analytics</h3>
-            <p>Live dashboards, lane economics, on-time rates, loyalty points — your shipping data, made useful.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============== PIPELINE (dark elevated section) ============== -->
-    <section class="section section--dark" id="how">
-      <div class="container">
-        <header class="pipeline__head reveal">
-          <div>
-            <span class="eyebrow">How we operate</span>
-            <h2 style="margin-top:20px">The boring parts of freight,<br /><span class="pink">handled by software.</span></h2>
-          </div>
-          <p class="lead">Most forwarders run on email threads and spreadsheets. We run on a pipeline — every step has a system behind it, and the humans focus on the calls that actually move freight.</p>
-        </header>
-
-        <ol class="pipeline__list reveal" aria-label="The five phases of a Swida shipment">
-          <li class="phase"><span class="phase__num">01</span>
-            <div><div class="phase__title">Request comes in</div><p class="phase__desc">AI parses your email or portal request, drafts a structured shipment record, and proposes a market-aware price — your coordinator just confirms.</p></div>
-            <span class="phase__tag">AI parsing</span>
-          </li>
-          <li class="phase"><span class="phase__num">02</span>
-            <div><div class="phase__title">Capacity is sourced</div><p class="phase__desc">Connected to every major European load exchange. We post once, negotiate fast, and lock the carrier with a binding rate.</p></div>
-            <span class="phase__tag phase__tag--blue">Exchange API</span>
-          </li>
-          <li class="phase"><span class="phase__num">03</span>
-            <div><div class="phase__title">Truck is dispatched</div><p class="phase__desc">Driver gets the order on their device. CMR generated automatically. Pickup window confirmed back to you before the wheels start turning.</p></div>
-            <span class="phase__tag">Automation</span>
-          </li>
-          <li class="phase"><span class="phase__num">04</span>
-            <div><div class="phase__title">Position is monitored</div><p class="phase__desc">An AI agent pulls GPS from the carrier's telematics provider every 2–4 hours and pushes it to your TMS or inbox. No "where is my truck?" emails.</p></div>
-            <span class="phase__tag phase__tag--blue">Real-time tracking</span>
-          </li>
-          <li class="phase"><span class="phase__num">05</span>
-            <div><div class="phase__title">It bills itself</div><p class="phase__desc">Delivery confirmed → invoice raised → sent over EDI or email. Carrier invoices auto-matched, posted, and reconciled — 80% straight-through.</p></div>
-            <span class="phase__tag">Auto-invoicing</span>
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <!-- ============== TOUCHPOINTS ============== -->
+    <!-- ============== TOUCHPOINTS — 6-card pipeline (Round 2: replaces Why Swida + How we operate) ============== -->
     <section class="section" id="touchpoints">
       <div class="container">
         <header class="feature-head reveal">
-          <span class="eyebrow">Where you feel it</span>
-          <h2 style="margin-top:20px">Four touchpoints where Swida<br />does not feel like <span class="pink">a forwarder.</span></h2>
+          <span class="eyebrow">How we work</span>
+          <h2 style="margin-top:20px">Six steps where Swida<br />does not feel like <span class="pink">a forwarder.</span></h2>
+          <p class="lead" style="margin-top:18px">From the moment your request lands to the dashboard that closes the loop — every step has a system behind it. Data, APIs, and AI, end-to-end.</p>
         </header>
 
         <div class="touch">
           <article class="touch__card reveal">
-            <div><span class="eyebrow">01 · Instacarrier</span>
-              <h3 style="margin-top:10px">Book a truck like an e-shop.</h3></div>
-            <p>Type origin and destination, pick a vehicle, see a binding price, click book. Pickup confirmed in under two hours.</p>
+            <div><span class="eyebrow">01 · Request</span>
+              <h3 style="margin-top:10px">AI parses the request, instantly.</h3></div>
+            <p>Book a truck like an e-shop with Instacarrier — or send us a free-text request and our AI parses it into a structured shipment, ready to price. Either way, no back-and-forth.</p>
+            <div class="touch__viz" aria-hidden="true">📩 <span class="tag">incoming</span> · accounts@client.tld
+<span class="com">"Need urgent van from Bratislava to Lyon
+tomorrow morning, ~1.2 t, dimensions..."</span>
+
+→ <span class="tag">AI parse</span>     <span class="ok">✓</span> structured shipment
+→ <span class="tag">geocode</span>      <span class="ok">✓</span> BTS · LYS · 1 420 km
+→ <span class="tag">price</span>        → <span class="br">€&nbsp;1&nbsp;240</span></div>
+          </article>
+
+          <article class="touch__card reveal">
+            <div><span class="eyebrow eyebrow--mute" style="color:#5B8DEF">02 · Pricing</span>
+              <h3 style="margin-top:10px">Market-aware, every quote.</h3></div>
+            <p>Every price is shaped by historical lane data, route economics, and a market-aware model — not a coordinator's gut feeling. Binding price, in under a minute.</p>
             <div class="touch__viz" aria-hidden="true"><span class="tag">POST</span> /instacarrier/quotes
 {
   "from": "Bratislava, SK",
@@ -1683,11 +1588,21 @@
   "kind": "van_3_5t",
   "kg":   1200
 }
-<span class="tag">200</span> <span class="ok">OK</span>  → <span class="br">€&nbsp;1&nbsp;240</span> · pickup in 2&nbsp;h</div>
+<span class="tag">200</span> <span class="ok">OK</span>  → <span class="br">€&nbsp;1&nbsp;240</span> · binding · pickup&nbsp;in&nbsp;2&nbsp;h</div>
           </article>
 
           <article class="touch__card reveal">
-            <div><span class="eyebrow eyebrow--mute" style="color:#5B8DEF">02 · Live position</span>
+            <div><span class="eyebrow">03 · Carrier sourcing</span>
+              <h3 style="margin-top:10px">Posted once. Locked in minutes.</h3></div>
+            <p>Connected to every major European load exchange. We post the demand once, negotiate fast, and lock the carrier with a binding rate — your coordinator just confirms.</p>
+            <div class="touch__viz" aria-hidden="true">[<span class="tag">10:14</span>] post to <span class="br">timocom · trans.eu · teleroute</span>
+[<span class="tag">10:21</span>] <span class="ok">3 carriers</span> responded
+[<span class="tag">10:24</span>] best rate matched, contract sent
+[<span class="tag">10:31</span>] driver assigned · CMR generated <span class="ok">✓</span></div>
+          </article>
+
+          <article class="touch__card reveal">
+            <div><span class="eyebrow eyebrow--mute" style="color:#5B8DEF">04 · Monitoring</span>
               <h3 style="margin-top:10px">Tracking pushed, not asked.</h3></div>
             <p>We pull GPS from the carrier's telematics provider on a schedule and push fresh location data into your TMS — or send a structured status email if you prefer ops by inbox.</p>
             <div class="touch__viz" aria-hidden="true">[<span class="tag">14:02</span>] shipment <span class="br">#SWD-9821</span> · A4 near Brno
@@ -1696,17 +1611,18 @@
           </article>
 
           <article class="touch__card reveal">
-            <div><span class="eyebrow">03 · Invoicing</span>
+            <div><span class="eyebrow">05 · Invoicing</span>
               <h3 style="margin-top:10px">Closing the loop, automatically.</h3></div>
-            <p>The moment delivery is confirmed, your invoice is generated and dispatched — by email, structured PDF, or full EDI integration.</p>
+            <p>The moment delivery is confirmed, your invoice is generated and dispatched — by email, structured PDF, or full EDI integration. One enterprise client of ours hasn't seen a manual freight invoice in over a year.</p>
             <div class="touch__viz" aria-hidden="true"><span class="com">// on delivery.confirmed</span>
 → render invoice (PDF&nbsp;+&nbsp;EDIFACT INVOIC)
 → send to <span class="ok">accounts@client.tld</span>
-→ post to <span class="br">/ap/ingest</span>  <span class="ok">✓</span></div>
+→ post to <span class="br">/ap/ingest</span>  <span class="ok">✓</span>
+→ carrier invoice auto-matched · 80% straight-through</div>
           </article>
 
           <article class="touch__card reveal">
-            <div><span class="eyebrow eyebrow--mute" style="color:#5B8DEF">04 · Client zone</span>
+            <div><span class="eyebrow eyebrow--mute" style="color:#5B8DEF">06 · Reporting</span>
               <h3 style="margin-top:10px">Your freight, in a dashboard.</h3></div>
             <p>See every shipment, every cost line, every on-time stat. Loyalty points you can spend on merch and perks. Lane analytics that let you plan smarter contracts next quarter.</p>
             <div class="touch__viz" aria-hidden="true">Q1 2026 · 312 shipments

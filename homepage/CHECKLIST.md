@@ -26,29 +26,33 @@ Legend: `[ ]` pending · `[~]` in progress · `[x]` done · `[?]` blocked / need
 - [x] Services tab content (Express Transports panel): stat `1 minute · Price quote` → `24/7 · Pricing`
 - [x] InstaCarrier hero form: **email input** added below "Delivery location" with an envelope icon. New CSS modifier `.lane__field--detached` keeps the dashed pickup→delivery connector from extending through the email row.
 - [x] InstaCarrier hero form: **"Or connect Instacarrier via API — quotes, booking, status callbacks, EDI invoicing"** affordance added as a soft pink/blue gradient pill (`.hero__api`) below the form, above the trust line.
-- [?] Truck banner ("One network. Every European border.") — **decision pending**; tracked in the Strategic decisions section.
+- [x] Truck banner reframed (option 🅱️): headline now *"24/7 dispatch. 35 countries. 25 000 trucks."* with 3 inline stat tiles below the copy. New CSS class `.truck-banner__stats`.
 
-### 🔵 Restructure — Touchpoints section (biggest content change)
+### 🔵 Restructure — Touchpoints section (biggest content change) — DONE
 
-Keep the **current grid styling**, replace contents: 4 cards → 6 cards that follow the `How we work` pipeline 1:1.
+Kept the existing grid styling; **expanded 4 → 6 cards** that follow the `How we work` pipeline 1:1 and absorb the 4 best `Why Swida` tech-first angles (per user's compromise direction).
 
-- [ ] Card 1 — **Request** — "Book a truck like on eshop via Instacarrier, or send us a request which we automatically parse to speed up processing."
-- [ ] Card 2 — **Pricing** — 1:1 from pipeline (AI / data-driven pricing). Copy to lift from current `How we operate` phase 2 + adapt.
-- [ ] Card 3 — **Carrier sourcing** — 1:1 from pipeline (exchange APIs / capacity sourcing). Copy from current phase 3.
-- [ ] Card 4 — **Monitoring** — "We pull GPS from the carrier's telematics provider on a schedule and push fresh location data into your TMS — or send a structured status email if you prefer ops by inbox."
-- [ ] Card 5 — **Invoicing** — "The moment delivery is confirmed, your invoice is generated and dispatched — by email, structured PDF, or full EDI integration."
-- [ ] Card 6 — **Reporting / Your freight, in a dashboard** — "See every shipment, every cost line, every on-time stat. Loyalty points you can spend on merch and perks. Lane analytics that let you plan smarter contracts next quarter."
-- [ ] Headline review — current *"Four touchpoints where Swida does not feel like a forwarder."* needs updating because it'll now be six.
+- [x] Card 1 — **Request** — AI parses email or Instacarrier form into a structured shipment.
+- [x] Card 2 — **Pricing** — Market-aware binding quote in under a minute.
+- [x] Card 3 — **Carrier sourcing** — One post to every major load exchange, locked in minutes.
+- [x] Card 4 — **Monitoring** — GPS pulled on schedule, pushed to client's TMS or inbox.
+- [x] Card 5 — **Invoicing** — Auto-issued on delivery, email/PDF/EDI; carrier invoices auto-matched at 80%.
+- [x] Card 6 — **Reporting / Dashboard** — Lane analytics, on-time stats, loyalty.
+- [x] Headline updated: "Four touchpoints …" → **"Six steps where Swida does not feel like a forwarder."** Lead paragraph added.
+
+Each card carries a monospace `.touch__viz` artifact (JSON, log, event handler, dashboard snapshot) so the tech-first claim has a concrete visual.
 
 ### 🟢 New section to add
 
 - [ ] **People section** — was in the original Klára design, content stays, but **graficky urobiť krajšie**. Doesn't need to be tied to info cards. Decide placement (likely between Touchpoints and final CTA).
 
-### ❓ Strategic decisions (need a quick call before touching)
+### ❓ Strategic decisions — RESOLVED
 
-- [?] **`Why Swida` technology features grid** — client suggests removing ("too much tech"), open to discussion. *Risk: weakens tech-first positioning.*
-- [?] **`How we operate` 5-phase dark pipeline** — client suggests removing, since same content lands in the expanded Touchpoints. *Probably safe to remove once Touchpoints round is finished.*
-- [?] **Overall tech-positioning trade-off** — with both removed, only Instacarrier widget + Touchpoints carry the "we're a tech forwarder" claim. Decide: drop both / drop one / keep both compressed into one tighter tech-proof section.
+User chose the **compromise**: one tighter section instead of three. Outcome:
+
+- [x] **`Why Swida` technology features grid** — REMOVED. The 4 best positioning angles (instant pricing, API/EDI, AI in the pipeline, real-time visibility) are folded into the 6 Touchpoint cards.
+- [x] **`How we operate` 5-phase dark pipeline** — REMOVED. Content moved 1:1 into Touchpoints.
+- [x] **Overall tech-positioning** — Instacarrier widget + the new 6-card Touchpoints carry the tech-first claim. The dark pipeline section is gone; the page now flows: hero → Recognition → What we do → **Touchpoints** → Truck banner → Stats → Final CTA → Footer.
 
 ### ✅ Approved as-is — don't touch
 
@@ -64,14 +68,14 @@ Keep the **current grid styling**, replace contents: 4 cards → 6 cards that fo
 
 ---
 
-## Suggested execution order
+## Execution log
 
-1. **Removals + label edits** (everything in 🔴 and 🟡 except the Truck banner decision) — ~30 min, single commit, ships immediately. Low risk, no design call needed.
-2. **InstaCarrier form additions** (email input + API affordance) — small layout work, one commit.
-3. **Strategic call** on `Why Swida` / `How we operate` / Truck banner *before* touching the bigger sections.
-4. **Touchpoints expansion** (4 → 6 cards).
-5. **People section** — new component, will need iteration.
-6. Final pass + commit + share new preview URL.
+1. ✅ Removals + label edits (Round 2 commit `575edc9`).
+2. ✅ InstaCarrier form additions (email input + `.hero__api` affordance) — same commit.
+3. ✅ Strategic call resolved — drop Why Swida + How we operate, expand Touchpoints, reframe Truck banner.
+4. ✅ Touchpoints expansion (4 → 6 cards) + Truck banner reframe — current commit.
+5. ⏳ **People section** — next up. Use original Klára Figma as visual base.
+6. ⏳ Final pass + commit + share new preview URL.
 
 ---
 
