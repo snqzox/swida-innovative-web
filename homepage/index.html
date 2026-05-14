@@ -745,27 +745,78 @@
     }
 
     /* ==========================================================================
-       TOUCHPOINTS
+       TOUCHPOINTS  (compact carousel — scroll-snap, prev/next, dot indicators)
        ========================================================================== */
-    .touch { display:grid; grid-template-columns:1fr; gap:20px; }
-    @media (min-width: 880px) { .touch { grid-template-columns:repeat(2, 1fr); } }
+    .touch-wrap { position:relative; }
+    .touch-controls {
+      display:flex; align-items:center; justify-content:space-between;
+      gap:16px; margin-bottom:20px; flex-wrap:wrap;
+    }
+    .touch-dots { display:flex; gap:6px; align-items:center; flex-wrap:wrap; }
+    .touch-dot {
+      width:24px; height:4px; border-radius:var(--r-pill);
+      background:var(--c-line-strong);
+      transition:background 220ms var(--ease-out), width 220ms var(--ease-out);
+      cursor:pointer; border:0; padding:0;
+    }
+    .touch-dot.is-active { background:var(--c-brand-500); width:40px; }
+    .touch-dot:hover:not(.is-active) { background:var(--c-fg-dim); }
+
+    .touch-nav { display:flex; gap:8px; }
+    .touch-nav-btn {
+      width:42px; height:42px; border-radius:50%;
+      border:1px solid var(--c-line-strong);
+      background:var(--c-bg); color:var(--c-fg);
+      display:grid; place-items:center; cursor:pointer;
+      transition:background 140ms var(--ease-out),
+                 border-color 140ms var(--ease-out),
+                 color 140ms var(--ease-out),
+                 transform 140ms var(--ease-out);
+    }
+    .touch-nav-btn:hover:not(:disabled) {
+      background:var(--c-brand-500); color:#fff;
+      border-color:var(--c-brand-500); transform:scale(1.06);
+    }
+    .touch-nav-btn:disabled { opacity:0.35; cursor:not-allowed; }
+    .touch-nav-btn svg { width:18px; height:18px; }
+
+    .touch {
+      display:flex; gap:20px;
+      overflow-x:auto;
+      scroll-snap-type:x mandatory;
+      scroll-behavior:smooth;
+      padding-bottom:14px;
+      scrollbar-width:thin;
+      scrollbar-color:var(--c-line-strong) transparent;
+      mask-image:linear-gradient(90deg, transparent 0, #000 1.5%, #000 98.5%, transparent 100%);
+      -webkit-mask-image:linear-gradient(90deg, transparent 0, #000 1.5%, #000 98.5%, transparent 100%);
+    }
+    .touch::-webkit-scrollbar { height:6px; }
+    .touch::-webkit-scrollbar-track { background:transparent; }
+    .touch::-webkit-scrollbar-thumb { background:var(--c-line-strong); border-radius:var(--r-pill); }
+    .touch::-webkit-scrollbar-thumb:hover { background:var(--c-fg-dim); }
+
     .touch__card {
-      padding:32px; border-radius:var(--r-xl);
+      flex:0 0 calc(100% - 32px);
+      scroll-snap-align:start;
+      padding:26px; border-radius:var(--r-xl);
       background:var(--c-bg);
       border:1px solid var(--c-line);
       display:grid; grid-template-rows:auto 1fr auto;
-      gap:20px; min-height:340px;
+      gap:16px; min-height:320px;
       transition:transform var(--t-base) var(--ease-out), box-shadow var(--t-base) var(--ease-out);
     }
+    @media (min-width: 720px) { .touch__card { flex:0 0 calc(50% - 10px); } }
+    @media (min-width: 1080px) { .touch__card { flex:0 0 calc(33.333% - 14px); } }
     .touch__card:hover { transform:translateY(-3px); box-shadow:var(--shadow-lift); }
-    .touch__card h3 { font-size:1.375rem; }
-    .touch__card p  { font-size:15px; line-height:1.65; }
+    .touch__card h3 { font-size:1.1875rem; line-height:1.25; }
+    .touch__card p  { font-size:14px; line-height:1.6; }
     .touch__viz {
       background:var(--touch-viz-bg); color:var(--touch-viz-fg);
       border-radius:var(--r-md);
-      padding:18px 20px;
-      font-family:var(--font-mono); font-size:12px;
-      line-height:1.8; white-space:pre-wrap; overflow:hidden;
+      padding:14px 16px;
+      font-family:var(--font-mono); font-size:11.5px;
+      line-height:1.7; white-space:pre-wrap; overflow:hidden;
       border:1px solid var(--touch-viz-border);
     }
     .touch__viz .tag { color:#82AAFF; }
@@ -2245,7 +2296,19 @@
           <p class="lead" style="margin-top:18px">From the moment your request lands to the dashboard that closes the loop — every step has a system behind it. Data, APIs, and AI, end-to-end.</p>
         </header>
 
-        <div class="touch">
+        <div class="touch-wrap reveal">
+          <div class="touch-controls">
+            <div class="touch-dots" role="tablist" aria-label="Touchpoints navigation"></div>
+            <div class="touch-nav">
+              <button type="button" class="touch-nav-btn" data-touch-prev aria-label="Previous">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+              </button>
+              <button type="button" class="touch-nav-btn" data-touch-next aria-label="Next">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="touch" data-touch-track>
           <article class="touch__card reveal">
             <div><span class="eyebrow">01 · Request</span>
               <h3 style="margin-top:10px">AI parses the request, instantly.</h3></div>
@@ -2313,6 +2376,7 @@ damage rate: <span class="ok">0.18%</span>
 top lane:    <span class="br">BTS → LYS</span>  €&nbsp;1&nbsp;180 avg
 loyalty:     <span class="ok">+ 2 480 pts</span></div>
           </article>
+        </div>
         </div>
       </div>
     </section>
@@ -3100,6 +3164,61 @@ loyalty:     <span class="ok">+ 2 480 pts</span></div>
           statNums.forEach(function (el) { statIo.observe(el); });
         }
       }
+
+      /* =====================================================================
+         TOUCHPOINTS CAROUSEL (scroll-snap + prev/next + dot indicator)
+         ===================================================================== */
+      (function () {
+        var track = document.querySelector("[data-touch-track]");
+        if (!track) return;
+        var cards = track.querySelectorAll(".touch__card");
+        var prev  = document.querySelector("[data-touch-prev]");
+        var next  = document.querySelector("[data-touch-next]");
+        var dotsHost = document.querySelector(".touch-dots");
+        if (!cards.length || !dotsHost) return;
+
+        var dots = [];
+        cards.forEach(function (_, i) {
+          var d = document.createElement("button");
+          d.type = "button";
+          d.className = "touch-dot";
+          d.setAttribute("role", "tab");
+          d.setAttribute("aria-label", "Go to step " + (i + 1));
+          d.addEventListener("click", function () {
+            cards[i].scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
+          });
+          dotsHost.appendChild(d);
+          dots.push(d);
+        });
+
+        function setActive(i) {
+          dots.forEach(function (d, k) { d.classList.toggle("is-active", k === i); });
+          if (prev) prev.disabled = i <= 0;
+          if (next) next.disabled = i >= cards.length - 1;
+        }
+        setActive(0);
+
+        // Active-card tracking via scroll position (more reliable than IO
+        // when multiple cards are fully visible at once).
+        var scrollTimer;
+        function updateActiveFromScroll() {
+          var cardW = cards[0].getBoundingClientRect().width + 20;  // + gap
+          var idx = Math.round(track.scrollLeft / cardW);
+          idx = Math.max(0, Math.min(cards.length - 1, idx));
+          setActive(idx);
+        }
+        track.addEventListener("scroll", function () {
+          clearTimeout(scrollTimer);
+          scrollTimer = setTimeout(updateActiveFromScroll, 60);
+        }, { passive: true });
+
+        function scrollByCard(dir) {
+          var cardW = cards[0].getBoundingClientRect().width;
+          track.scrollBy({ left: dir * (cardW + 20), behavior: "smooth" });
+        }
+        prev && prev.addEventListener("click", function () { scrollByCard(-1); });
+        next && next.addEventListener("click", function () { scrollByCard(1); });
+      })();
 
       /* =====================================================================
          BOOT
